@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.ico?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.ico?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":true,"dimmer":true},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="之前都是使用STMP发送邮件，用原来的方法发现不可行，最后Exchange Web Services Java API 实现   Maven12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.microsoft.ews-java-api&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;ews-java-api&amp;lt;/artifa">
+<meta name="keywords" content="Exchange-Email">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exchange-Email">
+<meta property="og:url" content="https://hsindumas.github.io/2018/09/13/Exchange-Email/index.html">
+<meta property="og:site_name" content="Hsin Dumas">
+<meta property="og:description" content="之前都是使用STMP发送邮件，用原来的方法发现不可行，最后Exchange Web Services Java API 实现   Maven12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.microsoft.ews-java-api&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;ews-java-api&amp;lt;/artifa">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-21T08:47:28.962Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Exchange-Email">
+<meta name="twitter:description" content="之前都是使用STMP发送邮件，用原来的方法发现不可行，最后Exchange Web Services Java API 实现   Maven12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.microsoft.ews-java-api&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;ews-java-api&amp;lt;/artifa">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://hsindumas.github.io/2018/09/13/Exchange-Email/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Exchange-Email | Hsin Dumas</title>
+  
+
+
+
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143397601-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-143397601-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hsin Dumas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Love My Wife</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">7</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">6</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="algolia-popup popup search-popup">
+  <div class="algolia-search">
+    <div class="algolia-search-input-icon">
+      <i class="fa fa-search"></i>
+    </div>
+    <div class="algolia-search-input" id="algolia-search-input"></div>
+  </div>
+
+  <div class="algolia-results">
+    <div id="algolia-stats"></div>
+    <div id="algolia-hits"></div>
+    <div id="algolia-pagination" class="algolia-pagination"></div>
+  </div>
+
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/HsinDumas" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hsindumas.github.io/2018/09/13/Exchange-Email/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hsin Dumas">
+      <meta itemprop="description" content="什么样的人都有，当然什么样的爱情也都有">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hsin Dumas">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Exchange-Email<a href="https://github.com/HsinDumas/HsinDumas.github.io/tree/master_posts/Exchange-Email.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil"></i></a>
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-13 17:56:22" itemprop="dateCreated datePublished" datetime="2018-09-13T17:56:22+08:00">2018-09-13</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-21 16:47:28" itemprop="dateModified" datetime="2019-02-21T16:47:28+08:00">2019-02-21</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span title="本文字数"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>之前都是使用STMP发送邮件，用原来的方法发现不可行，最后Exchange Web Services Java API 实现</p>
+</blockquote>
+<hr>
+<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.microsoft.ews-java-api<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ews-java-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.URISyntaxException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.core.ExchangeService;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.core.enumeration.property.BodyType;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.core.service.item.EmailMessage;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.credential.ExchangeCredentials;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.credential.WebCredentials;</span><br><span class="line"><span class="keyword">import</span> microsoft.exchange.webservices.data.property.complex.MessageBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Exchange邮件服务工具类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExchangeMailUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">final</span> Logger LOGGER = LoggerFactory.getLogger(ExchangeMailUtil.class);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String mailServer;</span><br><span class="line">  <span class="keyword">private</span> String user;</span><br><span class="line">  <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">(String to, String subject, String body)</span> </span>&#123;</span><br><span class="line">    LOGGER.info(<span class="string">"send mail to "</span> + to + <span class="string">" with subject "</span> + subject + <span class="string">" and body "</span> + body);</span><br><span class="line">    String mailServer = SettingUtil.getStringProp(<span class="string">"MAILSERVER"</span>);</span><br><span class="line">    String user = SettingUtil.getStringProp(<span class="string">"USER"</span>);</span><br><span class="line">    String password = SettingUtil.getStringProp(<span class="string">"PASSWORD"</span>);</span><br><span class="line">    ExchangeMailUtil mailUtil = <span class="keyword">new</span> ExchangeMailUtil(mailServer, user, password);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      mailUtil.send(subject, to, body);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      LOGGER.info(<span class="string">"sendMail error &#123;&#125; "</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ExchangeMailUtil</span><span class="params">(String mailServer, String user, String password)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.mailServer = mailServer;</span><br><span class="line">    <span class="keyword">this</span>.user = user;</span><br><span class="line">    <span class="keyword">this</span>.password = password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 创建邮件服务</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> 邮件服务</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> ExchangeService <span class="title">getExchangeService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ExchangeService service = <span class="keyword">new</span> ExchangeService(ExchangeVersion.Exchange2007_SP1);</span><br><span class="line">    <span class="comment">// 用户认证信息</span></span><br><span class="line">    ExchangeCredentials credentials;</span><br><span class="line">    credentials = <span class="keyword">new</span> WebCredentials(user, password);</span><br><span class="line">    service.setCredentials(credentials);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      service.setUrl(<span class="keyword">new</span> URI(mailServer));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (URISyntaxException e) &#123;</span><br><span class="line">      LOGGER.info(<span class="string">"getExchangeService error &#123;&#125; "</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> service;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> subject 邮件标题</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> to 收件人列表</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> bodyText 邮件内容</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">(String subject, String to, String bodyText)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    ExchangeService service = getExchangeService();</span><br><span class="line"></span><br><span class="line">    EmailMessage msg = <span class="keyword">new</span> EmailMessage(service);</span><br><span class="line">    msg.setSubject(subject);</span><br><span class="line">    MessageBody body = MessageBody.getMessageBodyFromText(bodyText);</span><br><span class="line">    body.setBodyType(BodyType.HTML);</span><br><span class="line">    msg.setBody(body);</span><br><span class="line">    msg.getToRecipients().add(to);</span><br><span class="line">    msg.send();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    ExchangeMailUtil mailUtil =</span><br><span class="line">        <span class="keyword">new</span> ExchangeMailUtil(<span class="string">"https://mail.***.com/EWS/exchange.asmx"</span>, <span class="string">"用户名"</span>, <span class="string">"密码"</span>);</span><br><span class="line">    mailUtil.send(<span class="string">"Subject"</span>, <span class="string">"**@gmail.com"</span>, <span class="string">"content"</span>);</span><br><span class="line">    System.out.println(<span class="string">"success"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="证书"><a href="#证书" class="headerlink" title="证书"></a>证书</h2><p>按照上面的方法还是不行，报错：<br>unable to find valid certification path to requested target<br>发现还要安装证书<br>以下是获取安全证书的一种方法，通过以下程序获取安全证书：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Copyright 2006 Sun Microsystems, Inc.  All Rights Reserved. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * Redistribution and use in source and binary forms, with or without </span></span><br><span class="line"><span class="comment"> * modification, are permitted provided that the following conditions </span></span><br><span class="line"><span class="comment"> * are met: </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *   - Redistributions of source code must retain the above copyright </span></span><br><span class="line"><span class="comment"> *     notice, this list of conditions and the following disclaimer. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *   - Redistributions in binary form must reproduce the above copyright </span></span><br><span class="line"><span class="comment"> *     notice, this list of conditions and the following disclaimer in the </span></span><br><span class="line"><span class="comment"> *     documentation and/or other materials provided with the distribution. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> *   - Neither the name of Sun Microsystems nor the names of its </span></span><br><span class="line"><span class="comment"> *     contributors may be used to endorse or promote products derived </span></span><br><span class="line"><span class="comment"> *     from this software without specific prior written permission. </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS </span></span><br><span class="line"><span class="comment"> * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, </span></span><br><span class="line"><span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR </span></span><br><span class="line"><span class="comment"> * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR </span></span><br><span class="line"><span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, </span></span><br><span class="line"><span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, </span></span><br><span class="line"><span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR </span></span><br><span class="line"><span class="comment"> * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF </span></span><br><span class="line"><span class="comment"> * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING </span></span><br><span class="line"><span class="comment"> * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS </span></span><br><span class="line"><span class="comment"> * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;  </span><br><span class="line"><span class="keyword">import</span> java.io.File;  </span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;  </span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;  </span><br><span class="line"><span class="keyword">import</span> java.security.KeyStore;  </span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;  </span><br><span class="line"><span class="keyword">import</span> java.security.cert.CertificateException;  </span><br><span class="line"><span class="keyword">import</span> java.security.cert.X509Certificate;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLContext;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLException;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSocket;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSocketFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.TrustManager;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.TrustManagerFactory;  </span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.X509TrustManager;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstallCert</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;  </span><br><span class="line">        String host;  </span><br><span class="line">        <span class="keyword">int</span> port;  </span><br><span class="line">        <span class="keyword">char</span>[] passphrase;  </span><br><span class="line">        <span class="keyword">if</span> ((args.length == <span class="number">1</span>) || (args.length == <span class="number">2</span>)) &#123;  </span><br><span class="line">            String[] c = args[<span class="number">0</span>].split(<span class="string">":"</span>);  </span><br><span class="line">            host = c[<span class="number">0</span>];  </span><br><span class="line">            port = (c.length == <span class="number">1</span>) ? <span class="number">443</span> : Integer.parseInt(c[<span class="number">1</span>]);  </span><br><span class="line">            String p = (args.length == <span class="number">1</span>) ? <span class="string">"changeit"</span> : args[<span class="number">1</span>];  </span><br><span class="line">            passphrase = p.toCharArray();  </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            System.out  </span><br><span class="line">                    .println(<span class="string">"Usage: java InstallCert &lt;host&gt;[:port] [passphrase]"</span>);  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"jssecacerts"</span>);  </span><br><span class="line">        <span class="keyword">if</span> (file.isFile() == <span class="keyword">false</span>) &#123;  </span><br><span class="line">            <span class="keyword">char</span> SEP = File.separatorChar;  </span><br><span class="line">            File dir = <span class="keyword">new</span> File(System.getProperty(<span class="string">"java.home"</span>) + SEP + <span class="string">"lib"</span>  </span><br><span class="line">                    + SEP + <span class="string">"security"</span>);  </span><br><span class="line">            file = <span class="keyword">new</span> File(dir, <span class="string">"jssecacerts"</span>);  </span><br><span class="line">            <span class="keyword">if</span> (file.isFile() == <span class="keyword">false</span>) &#123;  </span><br><span class="line">                file = <span class="keyword">new</span> File(dir, <span class="string">"cacerts"</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        System.out.println(<span class="string">"Loading KeyStore "</span> + file + <span class="string">"..."</span>);  </span><br><span class="line">        InputStream in = <span class="keyword">new</span> FileInputStream(file);  </span><br><span class="line">        KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());  </span><br><span class="line">        ks.load(in, passphrase);  </span><br><span class="line">        in.close();  </span><br><span class="line">  </span><br><span class="line">        SSLContext context = SSLContext.getInstance(<span class="string">"TLS"</span>);  </span><br><span class="line">        TrustManagerFactory tmf = TrustManagerFactory  </span><br><span class="line">                .getInstance(TrustManagerFactory.getDefaultAlgorithm());  </span><br><span class="line">        tmf.init(ks);  </span><br><span class="line">        X509TrustManager defaultTrustManager = (X509TrustManager) tmf  </span><br><span class="line">                .getTrustManagers()[<span class="number">0</span>];  </span><br><span class="line">        SavingTrustManager tm = <span class="keyword">new</span> SavingTrustManager(defaultTrustManager);  </span><br><span class="line">        context.init(<span class="keyword">null</span>, <span class="keyword">new</span> TrustManager[] &#123; tm &#125;, <span class="keyword">null</span>);  </span><br><span class="line">        SSLSocketFactory factory = context.getSocketFactory();  </span><br><span class="line">  </span><br><span class="line">        System.out  </span><br><span class="line">                .println(<span class="string">"Opening connection to "</span> + host + <span class="string">":"</span> + port + <span class="string">"..."</span>);  </span><br><span class="line">        SSLSocket socket = (SSLSocket) factory.createSocket(host, port);  </span><br><span class="line">        socket.setSoTimeout(<span class="number">10000</span>);  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            System.out.println(<span class="string">"Starting SSL handshake..."</span>);  </span><br><span class="line">            socket.startHandshake();  </span><br><span class="line">            socket.close();  </span><br><span class="line">            System.out.println();  </span><br><span class="line">            System.out.println(<span class="string">"No errors, certificate is already trusted"</span>);  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (SSLException e) &#123;  </span><br><span class="line">            System.out.println();  </span><br><span class="line">            e.printStackTrace(System.out);  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        X509Certificate[] chain = tm.chain;  </span><br><span class="line">        <span class="keyword">if</span> (chain == <span class="keyword">null</span>) &#123;  </span><br><span class="line">            System.out.println(<span class="string">"Could not obtain server certificate chain"</span>);  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(  </span><br><span class="line">                System.in));  </span><br><span class="line">  </span><br><span class="line">        System.out.println();  </span><br><span class="line">        System.out.println(<span class="string">"Server sent "</span> + chain.length + <span class="string">" certificate(s):"</span>);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">        MessageDigest sha1 = MessageDigest.getInstance(<span class="string">"SHA1"</span>);  </span><br><span class="line">        MessageDigest md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; chain.length; i++) &#123;  </span><br><span class="line">            X509Certificate cert = chain[i];  </span><br><span class="line">            System.out.println(<span class="string">" "</span> + (i + <span class="number">1</span>) + <span class="string">" Subject "</span>  </span><br><span class="line">                    + cert.getSubjectDN());  </span><br><span class="line">            System.out.println(<span class="string">"   Issuer  "</span> + cert.getIssuerDN());  </span><br><span class="line">            sha1.update(cert.getEncoded());  </span><br><span class="line">            System.out.println(<span class="string">"   sha1    "</span> + toHexString(sha1.digest()));  </span><br><span class="line">            md5.update(cert.getEncoded());  </span><br><span class="line">            System.out.println(<span class="string">"   md5     "</span> + toHexString(md5.digest()));  </span><br><span class="line">            System.out.println();  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        System.out  </span><br><span class="line">                .println(<span class="string">"Enter certificate to add to trusted keystore or 'q' to quit: [1]"</span>);  </span><br><span class="line">        String line = reader.readLine().trim();  </span><br><span class="line">        <span class="keyword">int</span> k;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            k = (line.length() == <span class="number">0</span>) ? <span class="number">0</span> : Integer.parseInt(line) - <span class="number">1</span>;  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (NumberFormatException e) &#123;  </span><br><span class="line">            System.out.println(<span class="string">"KeyStore not changed"</span>);  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        X509Certificate cert = chain[k];  </span><br><span class="line">        String alias = host + <span class="string">"-"</span> + (k + <span class="number">1</span>);  </span><br><span class="line">        ks.setCertificateEntry(alias, cert);  </span><br><span class="line">  </span><br><span class="line">        OutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="string">"jssecacerts"</span>);  </span><br><span class="line">        ks.store(out, passphrase);  </span><br><span class="line">        out.close();  </span><br><span class="line">  </span><br><span class="line">        System.out.println();  </span><br><span class="line">        System.out.println(cert);  </span><br><span class="line">        System.out.println();  </span><br><span class="line">        System.out  </span><br><span class="line">                .println(<span class="string">"Added certificate to keystore 'jssecacerts' using alias '"</span>  </span><br><span class="line">                        + alias + <span class="string">"'"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span>[] HEXDIGITS = <span class="string">"0123456789abcdef"</span>.toCharArray();  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">toHexString</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;  </span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder(bytes.length * <span class="number">3</span>);  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> b : bytes) &#123;  </span><br><span class="line">            b &amp;= <span class="number">0xff</span>;  </span><br><span class="line">            sb.append(HEXDIGITS[b &gt;&gt; <span class="number">4</span>]);  </span><br><span class="line">            sb.append(HEXDIGITS[b &amp; <span class="number">15</span>]);  </span><br><span class="line">            sb.append(<span class="string">' '</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> sb.toString();  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SavingTrustManager</span> <span class="keyword">implements</span> <span class="title">X509TrustManager</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> X509TrustManager tm;  </span><br><span class="line">        <span class="keyword">private</span> X509Certificate[] chain;  </span><br><span class="line">  </span><br><span class="line">        SavingTrustManager(X509TrustManager tm) &#123;  </span><br><span class="line">            <span class="keyword">this</span>.tm = tm;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">public</span> X509Certificate[] getAcceptedIssuers() &#123;  </span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkClientTrusted</span><span class="params">(X509Certificate[] chain, String authType)</span>  </span></span><br><span class="line"><span class="function">                <span class="keyword">throws</span> CertificateException </span>&#123;  </span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkServerTrusted</span><span class="params">(X509Certificate[] chain, String authType)</span>  </span></span><br><span class="line"><span class="function">                <span class="keyword">throws</span> CertificateException </span>&#123;  </span><br><span class="line">            <span class="keyword">this</span>.chain = chain;  </span><br><span class="line">            tm.checkServerTrusted(chain, authType);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>编译InstallCert.java，然后执行：java InstallCert hostname，比如：<br>java InstallCert <a href="http://www.twitter.com/" target="_blank" rel="noopener">www.twitter.com</a><br>会看到如下信息：</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">java InstallCert www.twitter.com  </span><br><span class="line">Loading KeyStore /opt/jdk1.8.0_112/jre/lib/security/cacerts...  </span><br><span class="line">Opening connection to www.twitter.com:443...  </span><br><span class="line">Starting SSL handshake...  </span><br><span class="line">  </span><br><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.Alerts.getSSLException(Alerts.java:150)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1476)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.Handshaker.fatalSE(Handshaker.java:174)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.Handshaker.fatalSE(Handshaker.java:168)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:846)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:106)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.Handshaker.processLoop(Handshaker.java:495)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.Handshaker.process_record(Handshaker.java:433)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:815)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1025)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1038)  </span><br><span class="line">    at InstallCert.main(InstallCert.java:63)  </span><br><span class="line">Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target  </span><br><span class="line">    at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:221)  </span><br><span class="line">    at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:145)  </span><br><span class="line">    at sun.security.validator.Validator.validate(Validator.java:203)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:172)  </span><br><span class="line">    at InstallCert$SavingTrustManager.checkServerTrusted(InstallCert.java:158)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.JsseX509TrustManager.checkServerTrusted(SSLContextImpl.java:320)  </span><br><span class="line">    at com.sun.net.ssl.internal.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:839)  </span><br><span class="line">    ... 7 more  </span><br><span class="line">Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target  </span><br><span class="line">    at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:236)  </span><br><span class="line">    at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:194)  </span><br><span class="line">    at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:216)  </span><br><span class="line">    ... 13 more  </span><br><span class="line">  </span><br><span class="line">Server sent 2 certificate(s):  </span><br><span class="line">  </span><br><span class="line"> 1 Subject CN=www.twitter.com, O=example.com, C=US  </span><br><span class="line">   Issuer  CN=Certificate Shack, O=example.com, C=US  </span><br><span class="line">   sha1    2e 7f 76 9b 52 91 09 2e 5d 8f 6b 61 39 2d 5e 06 e4 d8 e9 c7   </span><br><span class="line">   md5     dd d1 a8 03 d7 6c 4b 11 a7 3d 74 28 89 d0 67 54   </span><br><span class="line">  </span><br><span class="line"> 2 Subject CN=Certificate Shack, O=example.com, C=US  </span><br><span class="line">   Issuer  CN=Certificate Shack, O=example.com, C=US  </span><br><span class="line">   sha1    fb 58 a7 03 c4 4e 3b 0e e3 2c 40 2f 87 64 13 4d df e1 a1 a6   </span><br><span class="line">   md5     72 a0 95 43 7e 41 88 18 ae 2f 6d 98 01 2c 89 68   </span><br><span class="line">  </span><br><span class="line">Enter certificate to add to trusted keystore or 'q' to quit: [1]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入1，回车，然后会在当前的目录下产生一个名为“ssecacerts”的证书。<br>将证书拷贝到$JAVA_HOME/jre/lib/security目录下，或者通过以下方式：<br>System.setProperty(“javax.Net.ssl.trustStore”, “你的jssecacerts证书路径”);</p>
+<p>注意：因为是静态加载，所以要重新启动你的Web Server，证书才能生效。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>很开心对你有用，给博主一包辣条钱吧</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.jpg" alt="Hsin Dumas 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Hsin Dumas 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Exchange-Email/" rel="tag"># Exchange-Email</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+            <span class="post-meta-divider">|</span>
+          
+          <div class="social_share">
+            
+            
+              <div id="needsharebutton-postbottom">
+                <span class="btn">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </span>
+              </div>
+            
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/13/REST-CORS/" rel="next" title="REST-CORS">
+                <i class="fa fa-chevron-left"></i> REST-CORS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/13/NodeJs-Express-Restrict-IP/" rel="prev" title="NodeJs Express Restrict IP">
+                NodeJs Express Restrict IP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Hsin Dumas">
+            
+              <p class="site-author-name" itemprop="name">Hsin Dumas</p>
+              <div class="site-description motion-element" itemprop="description">什么样的人都有，当然什么样的爱情也都有</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="chat motion-element">
+              
+              
+              <i class="fa fa-comment"></i>
+                  Chat
+                
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hsindumas" title="GitHub &rarr; https://github.com/hsindumas" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:hsindumas@gmail.com" title="E-Mail &rarr; mailto:hsindumas@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/514007083" title="微博 &rarr; http://weibo.com/514007083" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://music.163.com/#/user/home?id=158844" title="网易云音乐 &rarr; https://music.163.com/#/user/home?id=158844" rel="noopener" target="_blank"><i class="fa fa-fw fa-music"></i>网易云音乐</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven"><span class="nav-number">1.</span> <span class="nav-text">Maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证书"><span class="nav-number">3.</span> <span class="nav-text">证书</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  
+    <div id="sidebar-dimmer"></div>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hsin Dumas</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长"></span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/canvas_sphere.min.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+  <script src="/js/js.cookie.js?v=7.2.0"></script>
+  <script src="/js/scroll-cookie.js?v=7.2.0"></script>
+
+
+  
+
+  
+  
+  
+
+  
+
+  
+  
+  
+
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '884fc197538762d080ee',
+    clientSecret: '2dbe8b98efa7673c1a5bb78ceeaaea27dda3948d',
+    repo: 'HsinDumas.github.io',
+    owner: 'HsinDumas',
+    admin: ['HsinDumas'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script>
+
+  
+
+
+  
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/algolia-search.js?v=7.2.0"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+      pbOptions = {};
+      
+        pbOptions.iconStyle = "box";
+      
+        pbOptions.boxForm = "horizontal";
+      
+        pbOptions.position = "bottomCenter";
+      
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "box";
+      
+        flOptions.boxForm = "horizontal";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: 19618,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+  
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script>
+  <script>pangu.spacingPage();</script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
