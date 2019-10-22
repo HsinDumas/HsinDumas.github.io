@@ -109,17 +109,17 @@
 
 
 
-  <meta name="description" content="[TOC] JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对">
+  <meta name="description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Interview-Note">
 <meta property="og:url" content="https://hsindumas.github.io/2019/10/22/Interview-Note/index.html">
 <meta property="og:site_name" content="Hsin Dumas">
-<meta property="og:description" content="[TOC] JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对">
+<meta property="og:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-22T14:14:24.282Z">
+<meta property="og:updated_time" content="2019-10-22T14:20:32.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Interview-Note">
-<meta name="twitter:description" content="[TOC] JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对">
+<meta name="twitter:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
 
 
 
@@ -464,7 +464,7 @@
                 
               
 
-              <time title="创建时间：2019-10-22 22:13:57 / 修改时间：22:14:24" itemprop="dateCreated datePublished" datetime="2019-10-22T22:13:57+08:00">2019-10-22</time>
+              <time title="创建时间：2019-10-22 22:13:57 / 修改时间：22:20:32" itemprop="dateCreated datePublished" datetime="2019-10-22T22:13:57+08:00">2019-10-22</time>
             </span>
           
 
@@ -506,8 +506,7 @@
       
 
       
-        <p>[TOC]</p>
-<h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
+        <h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
 <li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
 </li>
 <li><p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。</p>
@@ -535,6 +534,10 @@
 <p>ArrayList.remove 没有更新modCount<br>Iterator.remove 有更新modCount</p>
 </blockquote>
 </li>
+</ol>
+<a id="more"></a>
+
+<ol start="10">
 <li><p>红黑树和B树的区别</p>
 </li>
 <li><p>transient</p>
