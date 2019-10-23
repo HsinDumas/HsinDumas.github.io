@@ -116,10 +116,12 @@
 <meta property="og:site_name" content="Hsin Dumas">
 <meta property="og:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-22T14:20:32.767Z">
+<meta property="og:image" content="https://hsindumas.github.io/images/Thread.png">
+<meta property="og:updated_time" content="2019-10-23T13:20:05.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Interview-Note">
 <meta name="twitter:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
+<meta name="twitter:image" content="https://hsindumas.github.io/images/Thread.png">
 
 
 
@@ -464,13 +466,23 @@
                 
               
 
-              <time title="创建时间：2019-10-22 22:13:57 / 修改时间：22:20:32" itemprop="dateCreated datePublished" datetime="2019-10-22T22:13:57+08:00">2019-10-22</time>
+              <time title="创建时间：2019-10-22 22:13:57" itemprop="dateCreated datePublished" datetime="2019-10-22T22:13:57+08:00">2019-10-22</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-23 21:20:05" itemprop="dateModified" datetime="2019-10-23T21:20:05+08:00">2019-10-23</time>
+              </span>
             
           
 
@@ -534,38 +546,14 @@
 <p>ArrayList.remove 没有更新modCount<br>Iterator.remove 有更新modCount</p>
 </blockquote>
 </li>
-</ol>
-<a id="more"></a>
-
-<ol start="10">
 <li><p>红黑树和B树的区别</p>
-</li>
+<a id="more"></a></li>
 <li><p>transient</p>
 <blockquote>
 <p>不参与序列化</p>
 </blockquote>
 </li>
 <li><p>Long,Integer 包装类型常量 cache 为 -128 到 127 之间</p>
-</li>
-<li><p>三个线程按顺序执行的实现方式 </p>
-<blockquote>
-<p>使用join或者单线程池去穿行</p>
-</blockquote>
-</li>
-<li><p>ClassLoader.loadClass和 Class.forName 的区别</p>
-<blockquote>
-<p>ClassLoader.loadClass不会初始化类,  Class.forname 会初始化类以及静态代码块</p>
-</blockquote>
-</li>
-<li><p>io的理解</p>
-<blockquote>
-<p>BIO的情况下，轮询是否有IO操作，没有的话就进行下一个轮询，都轮询完再进行下一轮。基于字节流和字符流。<br>NIO的情况下，Selector管理多个信道，当有信道需要IO操作的时候，会通知Selector。基于Channel、Buffer。<br>NIO三大核心Channel、Buffer、Selector。</p>
-</blockquote>
-</li>
-<li><p>SynchronousQueue</p>
-<blockquote>
-<p>offer的时候如果没有take线程在等待的话，直接return false，(offer可以设置超时时间)。</p>
-</blockquote>
 </li>
 <li><p>缓存雪崩</p>
 <blockquote>
@@ -585,21 +573,6 @@
 <li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
 <blockquote>
 <p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用分段锁，每一段加锁，减少并发的冲突。在1.8的时候从分段锁改成CAS+Synchronized，使用volatile关键字对每一个Entry进行加锁，进一步减少了并发的冲突</p>
-</blockquote>
-</li>
-<li><p>volatile关键字</p>
-<blockquote>
-<p>一般线程修改值的流程是：从主内存中读取值到工作内存，修改工作内存的值，刷回主内存。<br>而被修饰的变量改变时会把其他线程的工作内存中的值失效，其他的线程会重新从主内存中取，而不是用自己的工作内存中的副本。</p>
-</blockquote>
-</li>
-<li><p>AtomicInteger 底层实现</p>
-<blockquote>
-<p>使用volatile修饰value，保证可见性。<br>使用CAS保证安全的修改值。</p>
-</blockquote>
-</li>
-<li><p>epoll和select区别</p>
-<blockquote>
-<p>epoll 是一种信号通知的被动机制，而select是需要主动轮询。</p>
 </blockquote>
 </li>
 <li><p>二叉查找树 -&gt; 二叉平衡树 -&gt; 红黑树</p>
@@ -629,7 +602,7 @@
 <blockquote>
 <p>checkedException : IOException, SQLException , ClassNotFoundException</p>
 </blockquote>
-<ol start="28">
+<ol start="21">
 <li>泛型的好处<blockquote>
 <p>没有泛型的时候只有Object，导致需要显式的强转类型，ClassCastException又是RuntimeException, 不容易被发现导致服务出错。</p>
 </blockquote>
@@ -650,7 +623,7 @@
 <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><ol>
 <li><p>spring五种作用域</p>
 <blockquote>
-<p>singleton,prototype,request,session,global session</p>
+<p>singleton,prototype(每次使用都创建),request,session,global session</p>
 </blockquote>
 </li>
 <li><p>Spring Bean的生命周期</p>
@@ -722,6 +695,12 @@
 <blockquote>
 <p>NESTED: 如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；没有就新增.</p>
 </blockquote>
+<ol start="8">
+<li>spring 的 controller 是单例，怎么保证并发的安全。<blockquote>
+<p>不要在controller中定义成员变量，尽量是静态变量<br>可以修改scope设置成prototype<br>可以使用ThreadLocal</p>
+</blockquote>
+</li>
+</ol>
 <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><ol>
 <li><p>元空间里有些啥</p>
 <blockquote>
@@ -781,6 +760,11 @@
 <li><p>类加载器</p>
 <blockquote>
 <p>JVM默认的加载顺序是 BootStrapClassLoader -&gt; ExtClassLoader -&gt; AppClassLoader -&gt; CustomClassLoader </p>
+</blockquote>
+</li>
+<li><p>ClassLoader.loadClass和 Class.forName 的区别</p>
+<blockquote>
+<p>ClassLoader.loadClass不会初始化类,  Class.forname 会初始化类以及静态代码块</p>
 </blockquote>
 </li>
 </ol>
@@ -859,11 +843,11 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> search)</span> </span>&#123;</span><br><span class="line">  Arrays.sort(arr);</span><br><span class="line">  <span class="keyword">int</span> start = <span class="number">0</span>, end = arr.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (start + end) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (arr[mid] == search) &#123;</span><br><span class="line">      <span class="keyword">return</span> mid;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[mid] &lt; search) &#123;</span><br><span class="line">      start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      end = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>插入排序</p>
+<li><p>选择排序</p>
 <blockquote>
-<p>模拟打扑克牌，从第二个数字开始，与前面的数字进行比较，插入的时候后面的数字都依次往后移动一位。</p>
+<p>每一轮都遍历一遍找出最小的数字，并和前面的数进行调换</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] insertSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> j = i, insert = arr[i];</span><br><span class="line">    <span class="keyword">while</span> (j - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; insert &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">      arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">      j--;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[j] = insert;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> min = arr[i];</span><br><span class="line">    <span class="keyword">int</span> position = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; min) &#123;</span><br><span class="line">        min = arr[j];</span><br><span class="line">        position = j;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[position] = arr[i];</span><br><span class="line">    arr[i] = min;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>冒泡排序</p>
 <blockquote>
@@ -871,11 +855,163 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bubble(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length - i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">        arr[j] = arr[j + <span class="number">1</span>];</span><br><span class="line">        arr[j + <span class="number">1</span>] = temp;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>选择排序</p>
+<li><p>插入排序</p>
 <blockquote>
-<p>每一轮都遍历一遍找出最小的数字，并和前面的数进行调换</p>
+<p>模拟打扑克牌，从第二个数字开始，与前面的数字进行比较，插入的时候后面的数字都依次往后移动一位。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] selectSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> min = arr[i];</span><br><span class="line">    <span class="keyword">int</span> position = i;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; min) &#123;</span><br><span class="line">        min = arr[j];</span><br><span class="line">        position = j;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[position] = arr[i];</span><br><span class="line">    arr[i] = min;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] insertSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> j = i, insert = arr[i];</span><br><span class="line">    <span class="keyword">while</span> (j - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; insert &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">      arr[j] = arr[j - <span class="number">1</span>];</span><br><span class="line">      j--;</span><br><span class="line">    &#125;</span><br><span class="line">    arr[j] = insert;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>希尔排序</p>
+<blockquote>
+<p>是插入排序的高级版，插入排序是依次与前面有序数组进行比较，而希尔是设置了步长，第一次的步长是数组长度的一半，每做完一轮就再除以2，直到最后步长是1，也就是退化成插入排序。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] shellSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> k = arr.length / <span class="number">2</span>; k &gt; <span class="number">0</span>; k /= <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &lt; arr.length; i++) &#123;</span><br><span class="line">      <span class="keyword">int</span> j = i, insert = arr[i];</span><br><span class="line">      <span class="keyword">while</span> (j - k &gt;= <span class="number">0</span> &amp;&amp; insert &lt; arr[j - k]) &#123;</span><br><span class="line">        arr[j] = arr[j - k];</span><br><span class="line">        j = j - k;</span><br><span class="line">      &#125;</span><br><span class="line">      arr[j] = insert;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快速排序</p>
+<blockquote>
+<p>使用迭代的算法，取一个base值，第一次就取数组第一个数作为base，j 指针从后往前找第一个比base小的然后不再移动，接着 i 指针从前往后找第一个比base大的，然后 i 和 j 指针的值互换，不停循环直到两个指针的位置一样。这时再以这个位置为分隔，每个区间自己重复上面的排序，直到区间无法再分为止。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] quickSort(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> end) &#123;</span><br><span class="line">  <span class="keyword">if</span> (start &gt; end) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> i = start, j = end, base = arr[start];</span><br><span class="line">  <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">    <span class="keyword">while</span> (base &lt;= arr[j] &amp;&amp; i &lt; j) &#123;</span><br><span class="line">      j--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (base &gt;= arr[i] &amp;&amp; i &lt; j) &#123;</span><br><span class="line">      i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">      <span class="keyword">int</span> temp = arr[j];</span><br><span class="line">      arr[j] = arr[i];</span><br><span class="line">      arr[i] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  arr[start] = arr[i];</span><br><span class="line">  arr[i] = base;</span><br><span class="line">  quickSort(arr, start, j - <span class="number">1</span>);</span><br><span class="line">  quickSort(arr, j + <span class="number">1</span>, end);</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>归并排序</p>
+<blockquote>
+<p>使用迭代的算法，把数组无限的分开，直到每个区间只有一个数，然后再反过来一层一层的进行排序合并，最后拼成完整的数组。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] mergeSort(<span class="keyword">int</span>[] a, <span class="keyword">int</span> low, <span class="keyword">int</span> high) &#123;</span><br><span class="line">  <span class="keyword">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">    mergeSort(a, low, mid);</span><br><span class="line">    mergeSort(a, mid + <span class="number">1</span>, high);</span><br><span class="line">    merge(a, low, mid, high);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span>[] temp = <span class="keyword">new</span> <span class="keyword">int</span>[end - start + <span class="number">1</span>];</span><br><span class="line">  <span class="keyword">int</span> i = start, j = mid + <span class="number">1</span>, k = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= end) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; arr[j]) &#123;</span><br><span class="line">      temp[k++] = arr[i++];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp[k++] = arr[j++];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (i &lt;= mid) &#123;</span><br><span class="line">    temp[k++] = arr[i++];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (j &lt;= end) &#123;</span><br><span class="line">    temp[k++] = arr[j++];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i1 = <span class="number">0</span>; i1 &lt; temp.length; i1++) &#123;</span><br><span class="line">    arr[start + i1] = temp[i1];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>基数排序</p>
+<blockquote>
+<p>针对数字比较大的数组排序，使用递归的方式。首先取出数组中最大的数，根据他的位数决定递归几次。比如第一次迭代就是第一位数字进行比较，用一个Map&lt;Integer,List&lt;&gt;&gt; 保存这一位出现的数字，以及对应的数。遍历完之后从0-9的顺序取出map中的list，依次覆盖原数组。然后进行下一轮迭代。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] radixSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &gt; max) &#123;</span><br><span class="line">      max = arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> times = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (max &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    max = max / <span class="number">10</span>;</span><br><span class="line">    times++;</span><br><span class="line">  &#125;</span><br><span class="line">  Map&lt;Integer, List&lt;Integer&gt;&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; times; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">int</span> x = arr[j] % (<span class="keyword">int</span>) Math.pow(<span class="number">10</span>, i + <span class="number">1</span>) / (<span class="keyword">int</span>) Math.pow(<span class="number">10</span>, i);</span><br><span class="line">      map.computeIfAbsent(x, v -&gt; <span class="keyword">new</span> ArrayList&lt;&gt;()).add(arr[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">while</span> (map.containsKey(j) &amp;&amp; map.get(j).size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        arr[count++] = map.get(j).remove(<span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>堆排序</p>
+<blockquote>
+<p>参考  <a href="https://www.cnblogs.com/Java3y/p/8639937.html" target="_blank" rel="noopener">https://www.cnblogs.com/Java3y/p/8639937.html</a><br>堆就是完全二叉树。相对二叉树不存在数组空间浪费。<br>完全二叉树：除了最后一层之外的其他每一层都被完全填充，并且所有结点都保持向左对齐。<br>完全二叉树特性：左子节点index = 父节点的index的两倍 + 1，右子节点index = 父节点的index的两倍 + 2<br>通过循环的方式，先按照完全二叉树的模型建堆，然后从最后一个父节点开始比较其与子节点的大小关系，小的话就和较大的子节点进行对调，对调后的以子节点的位置做上面的比较和对调。依次遍历完所有父节点之后。建堆结束。这时最大值就在堆顶，然后把最后一个叶子节点和堆顶对调，进行下一轮无序数组的遍历。有点像冒泡算法，每一轮都是把最大值放到无序数组的后面。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] heapSort(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">  System.out.println(Arrays.toString(arr));</span><br><span class="line">  <span class="keyword">int</span> arrayLength = arr.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrayLength - <span class="number">1</span>; i++) &#123;</span><br><span class="line">    buildMaxHeap(arr, arrayLength - <span class="number">1</span> - i);</span><br><span class="line">    System.out.println(<span class="string">"build"</span> + Arrays.toString(arr));</span><br><span class="line">    swap(arr, <span class="number">0</span>, arrayLength - <span class="number">1</span> - i);</span><br><span class="line">    System.out.println(<span class="string">"swap"</span> + Arrays.toString(arr));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] data, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> tmp = data[i];</span><br><span class="line">  data[i] = data[j];</span><br><span class="line">  data[j] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] data, <span class="keyword">int</span> lastIndex)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = (lastIndex - <span class="number">1</span>) / <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">int</span> k = i;</span><br><span class="line">    <span class="keyword">while</span> (k * <span class="number">2</span> + <span class="number">1</span> &lt;= lastIndex) &#123;</span><br><span class="line">      <span class="keyword">int</span> biggerIndex = <span class="number">2</span> * k + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (biggerIndex &lt; lastIndex) &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[biggerIndex] &lt; data[biggerIndex + <span class="number">1</span>]) &#123;</span><br><span class="line">          biggerIndex++;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (data[k] &lt; data[biggerIndex]) &#123;</span><br><span class="line">        swap(data, k, biggerIndex);</span><br><span class="line">        k = biggerIndex;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ol>
+<li><p>线程的实现方式</p>
+<blockquote>
+<p>实现Runnable接口，重写run方法，调用Thread的构造函数。<br>继承Thread，重写run方法</p>
+</blockquote>
+</li>
+<li><p>volatile关键字</p>
+<blockquote>
+<p>一般线程修改值的流程是：从主内存中读取值到工作内存，修改工作内存的值，刷回主内存。<br>而被修饰的变量改变时会把其他线程的工作内存中的值失效，这样其他的线程不会从内存中读取值，而是重新从主内存中取。<br>只能保证可见性，不具备原子性，不能替代锁的作用。</p>
+</blockquote>
+</li>
+<li><p>Executors提供四种线程池方法</p>
+<blockquote>
+<p>newCachedThreadPool : corePoolSize设置为0，maximumPoolSize设置为Integer最大值，过期时间60秒，队列使用 SynchronousQueue。<br>newFixedThreadPool(int nThreads) : corePoolSize设置为nThreads，maximumPoolSize设置为nThreads，没有过期时间，队列使用 LinkedBlockingQueue。<br>newScheduledThreadPool(int corePoolSize) : corePoolSize设置为corePoolSize，maximumPoolSize设置为Integer最大值，无过期时间，队列使用 DelayedWorkQueue。<br>newSingleThreadExecutor() : corePoolSize设置为1，maximumPoolSize设置为1，无过期时间，队列使用 LinkedBlockingQueue。<br>都是调用了ThreadPoolExecutor的构造函数，借助 ReentrantLock实现</p>
+</blockquote>
+</li>
+<li><p>BlockingQueue</p>
+<blockquote>
+<p>队列中没有数据的时候消费端阻塞<br>队列中数据满了的时候生产端阻塞</p>
+</blockquote>
+</li>
+<li><p>常见的BlockingQueue</p>
+<blockquote>
+<p>ArrayBlockingQueue：公平和非公平<br>LinkedBlockingQueue：使用 ReentrantLock 的 condition 实现队列两端分别加锁。<br>PriorityBlockingQueue：排序实现优先排序，可以让元素重写CompareTo或者给队列初始化的时候设置Comparator<br>DelayQueue：延迟期满才能取元素，可以用来做缓存和定时任务<br>SynchronousQueue：不存储数据, offer的时候如果没有take线程在等待的话，直接return false，(offer可以设置超时时间)。<br>LinkedTransferQueue：立即被消费。相比其他队列多了transfer和tryTransfer的方法。transfer：如果有消费者在等待则直接给消费者，如果没有就放在队列的尾部，等到被消费了才返回。tryTransfer：如果有消费者就直接给，没有的话返回false。<br>LinkedBlockingDeque：双向阻塞数组，可用于工作窃取模式。</p>
+</blockquote>
+</li>
+<li><p>拒绝策略</p>
+<blockquote>
+<p>AbortPolicy: 是jdk的默认策略，直接抛出异常<br>CallerRunsPolicy：在任务提交的线程上直接做任务<br>DiscardOldestPolicy：丢弃最老的任务<br>DiscardPolicy：丢弃当前任务</p>
+</blockquote>
+</li>
+<li><p>线程池工作流程</p>
+<blockquote>
+<p>线程池刚创建的时候是没有线程的，任务队列作为参数传进来，即使队列中有任务也不会执行。<br>当调用execute()的时候，如果运行线程小于 corePoolSize则创建新的。如果大于或等于corePoolSize则放入队列。队列满了的情况下如果运行线程比maxPoolSize小，就创建非核心线程，如果大于等于maxPoolSize就执行拒绝策略。<br>当线程做完了就去队列取下一个任务。<br>根据设置的过期时间，决定要不要关掉线程。</p>
+</blockquote>
+</li>
+<li><p>线程的生命周期</p>
+<blockquote>
+<p><img src="https://hsindumas.github.io/images/Thread.png" alt><br>new: new Thread()<br>runnable：thread.start()， jvm创建java stack和pc register<br>running：获得到cpu就执行run()<br>blocking：wait、锁 、sleep或者join，之后回复到runnable的状态<br>dead：正常结束、异常结束、thread.stop()。stop()已经废弃，释放锁会导致不同步的问题，可以自定义标志去退出或者使用interrupt()，以及isInterrupt()去做控制</p>
+</blockquote>
+</li>
+<li><p>seelp和wait的区别</p>
+<blockquote>
+<p>sleep是Thread的静态方法，wait是实例化对象的内部方法<br>sleep不会释放锁，wait会释放锁<br>sleep是放到等待队列，而wait是放到锁池</p>
+</blockquote>
+</li>
+<li><p>锁的种类</p>
+<blockquote>
+<p>乐观锁： CAS<br>悲观锁:    Synchronized<br>自旋锁：如果持有锁的线程能很快的释放锁，那就不需要从running到blocking再到runnable，只要占用cpu等一等就可以了，省去线程的上下文切换。JDK1.7后有JVM自己控制</p>
+</blockquote>
+</li>
+<li><p>ReentrantLock 和 synchronized的区别</p>
+<blockquote>
+<p>ReentrantLock依赖了AQS来实现，并通过lock()和unlock()进行控制，需要手动解锁。synchronize是由JVM控制自动解锁<br>ReentrantLock可以中断、支持公平锁、以及多个锁(读写锁)。ReentrantReadWriteLock 读锁不互斥，写锁互斥，读的时候上读锁，写的时候上写锁。<br>synchronized是通过对象内部的monitor实现</p>
+</blockquote>
+</li>
+<li><p>锁优化</p>
+<blockquote>
+<p>减少锁持有时间。只有在必要的代码上加锁。<br>减小锁的颗粒度。比如ConcurrentHashMap的分段锁。<br>锁粗化。如果不停的对一个锁加锁解锁不如把锁粗一点<br>锁分离。比如ReentrantLock的读写锁，以及LinkedBlockingQueue。</p>
+</blockquote>
+</li>
+<li><p>AtomicInteger 底层实现</p>
+<blockquote>
+<p>使用volatile修饰value，保证可见性。<br>使用CAS保证安全的修改值。<br>getAndIncrement()方法其实是一个do while循环尝试用cas更新数据。</p>
+</blockquote>
+</li>
+<li><p>什么是 AQS(Abstract Queue Synchronizer)</p>
+<blockquote>
+<p>ReentrantLock、Semaphore、CountDownLatch都依赖它。<br>两种资源共享方式：独占(ReentrantLock)和共享(Semaphore、CountDownLatch)<br>ReentrantReadWriteLock 独占和共享都实现了。</p>
+</blockquote>
+</li>
+<li><p>关闭线程池的方法</p>
+<blockquote>
+<p>shutdown: 停止submit-&gt;状态改成shutdown-&gt;已经sumbit的继续执行-&gt;执行完stop<br>shutdownNow：返回未执行的task-&gt;状态改成stop-&gt;停止正在执行的任务</p>
+</blockquote>
+</li>
+<li><p>假如有一个第三方接口，有很多个线程去调用获取数据，现在规定每秒钟最多有 10 个线程同时调用它，如何做到</p>
+<blockquote>
+<p>因为Executors.newScheduledThreadPool，设置10个corePoolSize，把maxPoolSize也改成10，然后设置delay为一秒。</p>
+</blockquote>
+</li>
+<li><p>execute和submit区别</p>
+<blockquote>
+<p>execute只能提交Runnable，但是submit能提交Callable</p>
+</blockquote>
+</li>
+<li><p>三个线程按顺序执行一次的实现方式 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Semaphore first = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Semaphore second = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Thread thread1 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="string">"1"</span>);</span><br><span class="line">            first.release();</span><br><span class="line">          &#125;);</span><br><span class="line">  Thread thread2 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">              first.acquire();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"2"</span>);</span><br><span class="line">            second.release();</span><br><span class="line">          &#125;);</span><br><span class="line">  Thread thread3 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">              second.acquire();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">              e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"3"</span>);</span><br><span class="line">          &#125;);</span><br><span class="line">  thread3.start();</span><br><span class="line">  thread2.start();</span><br><span class="line">  thread1.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>三个线程按顺序执行多次的实现方式 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Semaphore first = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Semaphore second = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Semaphore third = <span class="keyword">new</span> Semaphore(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  Thread thread1 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                first.acquire();</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              System.out.println(<span class="string">"1"</span>);</span><br><span class="line">              second.release();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">  Thread thread2 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                second.acquire();</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              System.out.println(<span class="string">"2"</span>);</span><br><span class="line">              third.release();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">  Thread thread3 =</span><br><span class="line">      <span class="keyword">new</span> Thread(</span><br><span class="line">          () -&gt; &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">              <span class="keyword">try</span> &#123;</span><br><span class="line">                third.acquire();</span><br><span class="line">              &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">              &#125;</span><br><span class="line">              System.out.println(<span class="string">"3"</span>);</span><br><span class="line">              first.release();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">  thread3.start();</span><br><span class="line">  thread2.start();</span><br><span class="line">  thread1.start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ThreadLocal原理</p>
+<blockquote>
+<p>每个Thread内部都有一个 ThreadLocal.ThreadLocalMap<br>ThreadLocalMap是ThreadLocal内部类，没有实现Map接口，是自己实现Map的功能<br>一个ThreadLocal只能保存一个副本，想要多个就创建多个ThreadLocal。<br>使用场景session</p>
+</blockquote>
+</li>
+<li><p>实现一个并发安全的链表</p>
+<blockquote>
+<p>Collections.synchronizedList()会根据instanceof RandomAccess来区别数组还是链表</p>
+</blockquote>
+</li>
+<li><p>CountDownLatch , cyclicbarrier,</p>
+<blockquote>
+<p>CountDownLatch一般用于某个线程A等待若干个其他线程执行完任务之后，它才执行<br>CyclicBarrier一般用于一组线程互相等待至某个状态，然后这一组线程再同时执行<br>CountDownLatch是不能够重用的，而CyclicBarrier是可以重用的。<br>Semaphore 其实和锁有点类似，它一般用于控制对某组资源的访问权限。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="io"><a href="#io" class="headerlink" title="io"></a>io</h2><ol>
+<li><p>io的理解</p>
+<blockquote>
+<p>BIO的情况下，轮询是否有IO操作，没有的话就进行下一个轮询，都轮询完再进行下一轮。基于字节流和字符流。<br>NIO的情况下，Selector管理多个信道，当有信道需要IO操作的时候，会通知Selector。基于Channel、Buffer。<br>NIO三大核心Channel、Buffer、Selector。</p>
+</blockquote>
+</li>
+<li><p>epoll和select区别</p>
+<blockquote>
+<p>epoll 是一种信号通知的被动机制，而select是需要主动轮询。</p>
+</blockquote>
+</li>
 </ol>
 
       
@@ -1192,7 +1328,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA基础"><span class="nav-number">1.</span> <span class="nav-text">JAVA基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">2.</span> <span class="nav-text">tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">3.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">4.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">5.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA基础"><span class="nav-number">1.</span> <span class="nav-text">JAVA基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">2.</span> <span class="nav-text">tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">3.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">4.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">5.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">7.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io"><span class="nav-number">8.</span> <span class="nav-text">io</span></a></li></ol></div>
             
 
           </div>
