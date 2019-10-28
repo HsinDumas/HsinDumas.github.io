@@ -109,19 +109,25 @@
 
 
 
-  <meta name="description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
+  <meta name="description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Interview-Note">
 <meta property="og:url" content="https://hsindumas.github.io/2019/10/22/Interview-Note/index.html">
 <meta property="og:site_name" content="Hsin Dumas">
-<meta property="og:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
+<meta property="og:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsindumas.github.io/images/IOC%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.png">
 <meta property="og:image" content="https://hsindumas.github.io/images/Thread.png">
-<meta property="og:updated_time" content="2019-10-23T13:20:05.657Z">
+<meta property="og:image" content="https://hsindumas.github.io/images/http-establish.png">
+<meta property="og:image" content="https://hsindumas.github.io/images/http-close.png">
+<meta property="og:image" content="https://hsindumas.github.io/images/reactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://hsindumas.github.io/images/reactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://hsindumas.github.io/images/%E4%B8%BB%E4%BB%8Ereactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:updated_time" content="2019-10-28T15:22:17.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Interview-Note">
-<meta name="twitter:description" content="JAVA基础 HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。  HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。  JAVA 四中引用类型  强引用软引用(SoftReference)，当内存不足的时候会被回收弱引用(WeakReference)，只要gc就被回收虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状">
-<meta name="twitter:image" content="https://hsindumas.github.io/images/Thread.png">
+<meta name="twitter:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
+<meta name="twitter:image" content="https://hsindumas.github.io/images/IOC%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.png">
 
 
 
@@ -481,7 +487,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-23 21:20:05" itemprop="dateModified" datetime="2019-10-23T21:20:05+08:00">2019-10-23</time>
+                <time title="修改时间：2019-10-28 23:22:17" itemprop="dateModified" datetime="2019-10-28T23:22:17+08:00">2019-10-28</time>
               </span>
             
           
@@ -519,19 +525,35 @@
 
       
         <h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
-<li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
+<li><p>HashMap的源码。</p>
+<blockquote>
+<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
+</blockquote>
 </li>
-<li><p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。</p>
+<li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
+<blockquote>
+<p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
+</blockquote>
 </li>
 <li><p>JAVA 四中引用类型</p>
 <blockquote>
-<p>强引用<br>软引用(SoftReference)，当内存不足的时候会被回收<br>弱引用(WeakReference)，只要gc就被回收<br>虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状态。</p>
+<p>强引用<br>软引用(SoftReference)，当内存不足的时候会被gc回收<br>弱引用(WeakReference)，只要gc就被回收<br>虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状态。</p>
 </blockquote>
 </li>
-<li><p>java中四种修饰符的限制范围。</p>
-</li>
 <li><p>Object类中的方法。</p>
+<blockquote>
+<p>clone(),equals(object),finalize(),getClass(),hashCode(),notify(),notifyAll(),toString(),wait()</p>
+</blockquote>
 </li>
+<li><p>负载均衡算法除了随机和轮询以外的一致性hash算法</p>
+<blockquote>
+<p>整个hash空间设计成圆环形，每个服务根据算法获得一个hash值，然后分布在圆环上，对服务的请求对象也用同样地算法分布在圆环上，然后以顺时针的方向去找自己最近的服务，然后调用。如果一个服务宕机，就顺时针往下找，如果新增的话也只影响部分请求。</p>
+</blockquote>
+</li>
+</ol>
+<a id="more"></a>
+
+<ol start="6">
 <li><p>接口和抽象类的区别</p>
 <blockquote>
 <p>jdk8新增默认方法和静态方法<br>jdk9增加private method 和 private static method，在有了这两个以后，接口和抽象类的区别，只剩下构造器，成员变量，以及单继承。<br>接口没有构造函数，可以多继承，成员变量只能public<br>抽象类有构造函数，单继承，成员变量可以private</p>
@@ -546,8 +568,6 @@
 <p>ArrayList.remove 没有更新modCount<br>Iterator.remove 有更新modCount</p>
 </blockquote>
 </li>
-<li><p>红黑树和B树的区别</p>
-<a id="more"></a></li>
 <li><p>transient</p>
 <blockquote>
 <p>不参与序列化</p>
@@ -570,19 +590,14 @@
 <p>get() 方法其实就是用的 containsKey 的方法。</p>
 </blockquote>
 </li>
-<li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
-<blockquote>
-<p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用分段锁，每一段加锁，减少并发的冲突。在1.8的时候从分段锁改成CAS+Synchronized，使用volatile关键字对每一个Entry进行加锁，进一步减少了并发的冲突</p>
-</blockquote>
-</li>
 <li><p>二叉查找树 -&gt; 二叉平衡树 -&gt; 红黑树</p>
 <blockquote>
-<p>二叉树是按照顺序左小又大，但是会出现链式的特殊情况，使得查找的效率降低。<br>为了解决这个问题，出现了二叉平衡树，每个节点的左子树和右子树的高度差不超过1。<br>二叉树的特性导致需要不断的左旋和右旋，因此出现了红黑树。红黑数具有二叉树的特点，根节点是黑色的，叶子节点都是黑色的空节点不存数据，相邻节点不能同时为红色，每个节点到可达叶子节点的路径包含相同数目的黑色节点。</p>
+<p>二叉查找树是按照顺序左小又大，但是会出现链式的特殊情况，使得查找的效率降低。<br>为了解决这个问题，出现了二叉平衡树，每个节点的左子树和右子树的高度差不超过1。<br>二叉树的特性导致需要不断的左旋和右旋，因此出现了红黑树。红黑数具有二叉树的特点，根节点是黑色的，叶子节点都是黑色的空节点不存数据，相邻节点不能同时为红色，每个节点到可达叶子节点的路径包含相同数目的黑色节点。</p>
 </blockquote>
 </li>
 <li><p>单例模式</p>
 <blockquote>
-<p>双重检查 instance使用 volatile 关键字修饰，然后getInstance方法不加锁，而是在instance为null的情况下加锁初始化，比起在getInstance方法上加锁效率要高很多。</p>
+<p>五种写法，饿汉，饱汉，双重检查，静态内部类，枚举<br>双重检查: getInstance方法不加锁，而是在instance为null的情况下加锁初始化，比起在getInstance方法上加锁效率要高很多，在同步块中还是要加入instacnce的空判断，所以叫双重检查。</p>
 </blockquote>
 </li>
 <li><p>防反编译</p>
@@ -602,13 +617,27 @@
 <blockquote>
 <p>checkedException : IOException, SQLException , ClassNotFoundException</p>
 </blockquote>
-<ol start="21">
-<li>泛型的好处<blockquote>
+<ol start="19">
+<li><p>泛型的好处</p>
+<blockquote>
 <p>没有泛型的时候只有Object，导致需要显式的强转类型，ClassCastException又是RuntimeException, 不容易被发现导致服务出错。</p>
 </blockquote>
 </li>
-</ol>
-<h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><ol>
+<li><p>swicth的表达式不能为null</p>
+<blockquote>
+<p>底层其实是调用表达式的hashcode方法，所以会报NullPointerException</p>
+</blockquote>
+</li>
+<li><p>基本类型占多少bit（1字节=8bit）</p>
+<blockquote>
+<p>byte 8bit<br>short 16bit<br>int 32bit<br>long 64bit<br>float 32bit<br>double 64bit<br>char 16bit<br>bool 1bit</p>
+</blockquote>
+</li>
+<li><p>实例化顺序（都是先父后子）</p>
+<blockquote>
+<p>静态变量和代码块一起-&gt;非静态变量和构造函数</p>
+</blockquote>
+<h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2></li>
 <li><p>tomcat加载隔离</p>
 <blockquote>
 <p>tomcat的加载顺序是 BootStrapClassLoader -&gt; CustomClassLoader(WEB-INF/classes) -&gt; CustomClassLoader(WEB-INF/lib) -&gt; CommonClassloader(tomcat\lib)。所以要用公共的jar还得把自己目录下的jar删除<br>tomcat没有遵守双亲委派机制。自定义了 CommonClassloader 、CatalinaClassLoader、 SharedClassLoader,但是tomcat的默认配置catalina.properties里面只配了common，所以 CatalinaClassLoader 和 SharedClassLoader 其实是空的，不过都设置了 parent 是 CommonClassloader。<br>在tomcat中都是通过扩展URLClassLoader来实现自己的类加载器。</p>
@@ -616,7 +645,7 @@
 </li>
 <li><p>tomcat结构</p>
 <blockquote>
-<p>参考 <a href="https://blog.csdn.net/xlgen157387/article/details/79006434" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/79006434</a><br>一个server有多个service，一个service有多个connector和一个container<br>service是对外提供服务<br>connector是接受请求并封装成Request和Response<br>container是封装和管理servlet，以及处理request请求。<br>请求流程 ：请求-&gt;service-&gt;connector-&gt;container-&gt;connector-&gt;client<br>connector使用ProtocolHandler处理请求，ProtocolHandler包含 Endpoint、Processor、Adapter。<br>connector流程 ：EndPoint处理底层Socket网络请求，Processor将EndPoint接受的socket封装成Request，Adapter用于将request交给Container进行具体的处理。<br>一个service一个Engine，一个Engine可以有多个host，host对应tomcat目录的webapps，一般就一个。一个host可以有多个Context，对应webapps下面的ROOT目录以及同级其他目录。<br>request-&gt;container-&gt;EnginePipline-&gt;EngineValve1,EngineValve2…-&gt;StandardEngineValve-&gt;HostPipeline-&gt;Hostvalve1,Hostvalve2…-&gt;StandardHostValve-&gt;ContextPipeline-&gt;ContextValve1,ContextValve2…-&gt;StandardContextValve-&gt;WrapperPipeline-&gt;WrappedValve1,WrappedValve2…-&gt;StandardWrappedValve-&gt;创建FilterChain-&gt;doFilter-&gt;Connector-&gt;client</p>
+<p>参考 <a href="https://blog.csdn.net/xlgen157387/article/details/79006434" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/79006434</a><br>一个server有多个service，一个service有多个connector，但只有一个container<br>service是对外提供服务<br>connector是接受请求并封装成Request和Response<br>container是封装和管理servlet，以及处理request请求。<br>请求流程 ：请求-&gt;service-&gt;connector-&gt;container-&gt;connector-&gt;client<br>connector使用ProtocolHandler处理请求，ProtocolHandler包含 Endpoint、Processor、Adapter。<br>connector流程 ：EndPoint处理底层Socket网络请求，Processor将EndPoint接受的socket封装成Request，Adapter用于将request交给Container进行具体的处理。<br>一个service一个Engine，一个Engine可以有多个host，host对应tomcat目录的webapps，一般就一个。一个host可以有多个Context，对应webapps下面的ROOT目录以及同级其他目录。<br>request-&gt;container-&gt;EnginePipline-&gt;EngineValve1,EngineValve2…-&gt;StandardEngineValve-&gt;HostPipeline-&gt;Hostvalve1,Hostvalve2…-&gt;StandardHostValve-&gt;ContextPipeline-&gt;ContextValve1,ContextValve2…-&gt;StandardContextValve-&gt;WrapperPipeline-&gt;WrappedValve1,WrappedValve2…-&gt;StandardWrappedValve-&gt;创建FilterChain-&gt;doFilter-&gt;Connector-&gt;client</p>
 </blockquote>
 </li>
 </ol>
@@ -696,8 +725,19 @@
 <p>NESTED: 如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；没有就新增.</p>
 </blockquote>
 <ol start="8">
-<li>spring 的 controller 是单例，怎么保证并发的安全。<blockquote>
+<li><p>spring 的 controller 是单例，怎么保证并发的安全。</p>
+<blockquote>
 <p>不要在controller中定义成员变量，尽量是静态变量<br>可以修改scope设置成prototype<br>可以使用ThreadLocal</p>
+</blockquote>
+</li>
+<li><p>Spring 的IOC 循环依赖</p>
+<blockquote>
+<p><img src="https://hsindumas.github.io/images/IOC%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.png" alt><br>当初始化A还没赋值的时候，发现依赖B于是先去BeanFactory获取B，没获取到就去初始化B，发现B又依赖A，这个时候从BeanFactory获取到A的早前版本，就是没有赋值完成的版本，然后给B去完成赋值，最后A完成初始化。</p>
+</blockquote>
+</li>
+<li><p>Spring设计模式</p>
+<blockquote>
+<p>工厂模式<br>单例模式<br>策略模式<br>观察者模式(spring 通常用listener实现)<br>适配器模式<br>包装器模式</p>
 </blockquote>
 </li>
 </ol>
@@ -729,7 +769,7 @@
 </li>
 <li><p>如何确定垃圾</p>
 <blockquote>
-<p>引用技术法，问题是循环引用的话没有办法回收<br>可达性分析法，以GC roots对象作为起点搜索，如果没有可达路径就称为不可达对象。不可达对象变成可回收对象至少经过两次标记。</p>
+<p>引用技术法，问题是循环引用的话没有办法回收<br>可达性分析法，以GC roots对象作为起点搜索，如果没有可达路径就称为不可达对象。不可达对象变成可回收对象至少经过两次标记。<br>可以作为GC root对象的类型：java stack和native method statck中引用的对象，以及Method Area的Runtime Constant Pool中的引用对象</p>
 </blockquote>
 </li>
 <li><p>垃圾回收算法</p>
@@ -739,12 +779,12 @@
 </li>
 <li><p>垃圾收集器</p>
 <blockquote>
-<p>Serial 使用复制算法以及使用单线程，当gc时其他工作线程要暂停工作。是VM在client模式下的默认新生代收集器。<br>ParNew 是Serial的多线程版，复制算法以及gc时其他工作线程同样要暂停工作。<br>Parallel Scavenge 只是比 ParNew 多了自适应调节策略。也是针对新生代的收集器。是VM在server模式下的默认新生代收集器。<br>Serial Old 和Serial一样使用单线程，当gc是其他工作线程要暂停工作。不同的是使用标记整理算法。是VM在client模式下的默认老生代收集器。<br>Parallel Old 是Parallel Scavenge的老年代版本，除了算法用标记整理以外，和它一模一样。<br>CMS 使用标记清除算法。比前几个要复杂一点，先是初始标记(标记和gcroot直接关联的对象，暂停其他线程)，然后并发标记(追踪gcroot，不用暂停其他线程)，接着重新标记(修正并发标记期间发生变动的对象，暂停其他线程)，最后并发清除(不暂停其他线程)。主要目的是获得最短的停顿时间。<br>g1 使用标记整理算法和分区收集。不会产生碎片以及效率高。<br>JDK1.8在server模式下默认是 Parallel Scavenge + Serial Old 。1.9之后默认是G1并且废弃CMS。</p>
+<p>Serial 使用复制算法以及使用单线程，当gc时其他工作线程要暂停工作。是VM在client模式下的默认新生代收集器。<br>ParNew 是Serial的多线程版，也是复制算法，gc时其他工作线程同样要暂停工作。<br>Parallel Scavenge 只是比 ParNew 多了自适应调节策略来更加高效的使用CPU。也是针对新生代的收集器。是VM在server模式下的默认新生代收集器。<br>Serial Old 和Serial一样使用单线程，当gc是其他工作线程要暂停工作。不同的是使用标记整理算法。是VM在client模式下的默认老生代收集器。<br>Parallel Old 是Parallel Scavenge的老年代版本，除了算法用标记整理以外，和它一模一样。<br>CMS 使用标记清除算法。比前几个要复杂一点，先是初始标记(标记和gcroot直接关联的对象，暂停其他线程)，然后并发标记(追踪gcroot，不用暂停其他线程)，接着重新标记(修正并发标记期间发生变动的对象，暂停其他线程)，最后并发清除(不暂停其他线程)。主要目的是获得最短的停顿时间。<br>g1 流程和CMS差不多，但是使用标记整理算法和分区收集。不会产生碎片以及效率高。<br>JDK1.8在server模式下默认是 Parallel Scavenge + Serial Old 。1.9之后默认是G1并且废弃CMS。</p>
 </blockquote>
 </li>
 <li><p>垃圾回收的实现原理</p>
 <blockquote>
-<p>首先是如何确定垃圾，然后是垃圾回收的算法，最后讲垃圾收集器。</p>
+<p>首先是如何确定垃圾，然后是垃圾回收的算法，最后讲垃圾收集器。<br>System.gc() 只能是发送了一个gc的请求，至于会不会执行，什么时候执行是不能确定的。</p>
 </blockquote>
 </li>
 <li><p>内存泄漏</p>
@@ -767,11 +807,21 @@
 <p>ClassLoader.loadClass不会初始化类,  Class.forname 会初始化类以及静态代码块</p>
 </blockquote>
 </li>
+<li><p>JVM的栈中引用如何和堆中的对象产生关联</p>
+<blockquote>
+<p>对象生成时，产生的首地址存储在栈中，这样两者就关联起来了。</p>
+</blockquote>
+</li>
+<li><p>逃逸分析</p>
+<blockquote>
+<p>通过逃逸分析决定是否需要把对象放在heap上，而直接放在java stack里，作为一个栈帧的一部分。</p>
+</blockquote>
+</li>
 </ol>
 <h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><ol>
 <li><p>Mysql 的InnoDB引擎为什么使用B+树的索引模型</p>
 <blockquote>
-<p>相比与红黑树，B+是多路树，红黑树是二叉树，这样红黑树的高度会更大，也就是io的次数会更多，所以不适合<br>Hash索引适合等值查询，无法范围查询；无法利用索引完成排序；不支持联合索引的最左匹配规则；有重复键的情况下效率低</p>
+<p>与红黑树相比，B+是多路树，红黑树是二叉树，这样红黑树的高度会更大，也就是io的次数会更多，所以不适合<br>与B-树相比，B+树只在叶子节点存放数据，而B-在每个节点都存放数据。没有数据存储这样每一页的key就比B+多，高度更浅，io次数更少。而且B+的所有叶子节点有链接，这样就可以范围查找和分页查找。<br>与Hash相比，可以范围查找，可以排序，最左前缀匹配规则。但是hash的等值查找很快。</p>
 </blockquote>
 </li>
 <li><p>B+树的叶子节点存什么</p>
@@ -781,7 +831,7 @@
 </li>
 <li><p>Mysql的隔离级别</p>
 <blockquote>
-<p>我们线上的级别是可重复读(Repeatable Read)，第二高的级别。读的时候上锁，但是无法锁住插入的数据，导致多了一个数据，这就是幻读。<br>重复读就是第一次读和第二次读的相同的sql但是结果不一样，所以使用重复读的隔离界别，读的时候上锁这样就不会出现前面的情况。<br>Read Uncommitted &lt; Read Committed &lt; Repeatable Read &lt; Serializable</p>
+<p>我们使用的mysql级别是5.5<br>我们线上的级别是可重复读(Repeatable Read)也是mysql的默认级别，第二高的级别。读的时候上锁，但是无法锁住插入的数据，导致多了一个数据，这就是幻读。<br>重复读就是第一次读和第二次读的相同的sql但是结果不一样，所以使用重复读的隔离界别，读的时候上锁这样就不会出现前面的情况。<br>Read Uncommitted &lt; Read Committed &lt; Repeatable Read &lt; Serializable</p>
 </blockquote>
 </li>
 <li><p>MySQL5.6中对索引做了哪些优化</p>
@@ -802,6 +852,26 @@
 <li><p>MySQL是如何做到可以恢复到任意一秒状态的</p>
 <blockquote>
 <p>有两个日志,redo和bin，这两个是保持一致的。Mysql是两阶段提交，写入redo并prepare-&gt;写入bin-&gt;commit</p>
+</blockquote>
+</li>
+<li><p>Mysql有哪些引擎</p>
+<blockquote>
+<p>MyISAM 插入查询快，但是不支持事物<br>csv，每个表创建一个csv文件</p>
+</blockquote>
+</li>
+<li><p>事务特性ACID</p>
+<blockquote>
+<p>Atomicity 原子性，要么都成功要么都失败<br>Consistency 一致性，数据保持一致。比如转账，两个帐户总金额在转账后不能变。<br>Isolation 隔离性，并发的AB事务，A事务来看B要么已经做好，要么还没做。<br>Durability 持久化，修改永久保持</p>
+</blockquote>
+</li>
+<li><p>慢查询</p>
+<blockquote>
+<p>show status可以看Slow_queries<br>explain来看是否使用了index，possible_keys可能使用的索引，key实际使用的key</p>
+</blockquote>
+</li>
+<li><p>MVCC</p>
+<blockquote>
+<p>普通的select都是快照读，下面的是当前读<br>读的的时候不能写(S锁) select * from table where ? lock in share mode;<br>写的时候不能读(X锁) select * from table where ? for update; </p>
 </blockquote>
 </li>
 </ol>
@@ -825,11 +895,6 @@
 <li><p>给定一个二叉搜索树(BST)，找到树中第K小的节点</p>
 <blockquote>
 <p>BST的重要性质，中序遍历是有序数组。这样通过中序遍历并以K作为倒计时，K=0时即可结束遍历。</p>
-</blockquote>
-</li>
-<li><p>设计和实现一个LRU（最近最少使用）缓存数据结构</p>
-<blockquote>
-<p>直接继承LinkedHashMap，调用super的构造函数，并设置以访问的顺序排序，重写removeEldestEntry以及get方法。</p>
 </blockquote>
 </li>
 <li><p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
@@ -896,7 +961,7 @@
 <h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ol>
 <li><p>线程的实现方式</p>
 <blockquote>
-<p>实现Runnable接口，重写run方法，调用Thread的构造函数。<br>继承Thread，重写run方法</p>
+<p>实现Runnable接口，重写run方法，调用Thread的构造函数。<br>继承Thread，重写run方法<br>通过线程池创建<br>通过 Callable 或者 FutureTask 创建线程</p>
 </blockquote>
 </li>
 <li><p>volatile关键字</p>
@@ -946,7 +1011,7 @@
 </li>
 <li><p>ReentrantLock 和 synchronized的区别</p>
 <blockquote>
-<p>ReentrantLock依赖了AQS来实现，并通过lock()和unlock()进行控制，需要手动解锁。synchronize是由JVM控制自动解锁<br>ReentrantLock可以中断、支持公平锁、以及多个锁(读写锁)。ReentrantReadWriteLock 读锁不互斥，写锁互斥，读的时候上读锁，写的时候上写锁。<br>synchronized是通过对象内部的monitor实现</p>
+<p>ReentrantLock实现了Lock接口，依赖了AQS来实现，并通过lock()和unlock()进行控制，需要手动解锁。synchronize是由JVM控制自动解锁<br>ReentrantLock可以中断、支持公平锁、以及多个锁(读写锁)。ReentrantReadWriteLock 读锁不互斥，写锁互斥，读的时候上读锁，写的时候上写锁。<br>synchronized是通过对象内部的monitor实现，不可以中断。<br>Lock有三个实现类，就是ReentrantLock , ReentrantReadWriteLock.ReadLock, ReentrantReadWriteLock.WriteLock。</p>
 </blockquote>
 </li>
 <li><p>锁优化</p>
@@ -1000,16 +1065,208 @@
 <p>CountDownLatch一般用于某个线程A等待若干个其他线程执行完任务之后，它才执行<br>CyclicBarrier一般用于一组线程互相等待至某个状态，然后这一组线程再同时执行<br>CountDownLatch是不能够重用的，而CyclicBarrier是可以重用的。<br>Semaphore 其实和锁有点类似，它一般用于控制对某组资源的访问权限。</p>
 </blockquote>
 </li>
+<li><p>使用 synchronized 修饰静态方法和非静态方法有什么区别。</p>
+<blockquote>
+<p>修饰静态方法是对整个类加锁，非静态方法只是针对方法。</p>
+</blockquote>
+</li>
+<li><p>死锁的必要条件</p>
+<blockquote>
+<p>互斥条件：一个资源一次只能被一个线程使用<br>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放<br>不剥夺权利：进程已获得资源后，在使用完前，不能被强行剥夺。<br>循环等待条件：若干资源形成首位相接的循环等待资源关系。</p>
+</blockquote>
+</li>
+<li><p>Callable和Runnable的区别如下：</p>
+<blockquote>
+<p>Callable定义的方法是call，而Runnable定义的方法是run。<br>Callable的call方法可以有返回值，而Runnable的run方法不能有返回值。<br>Callable的call方法可抛出异常，而Runnable的run方法不能抛出异常。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><ol>
+<li><p>http1.0，http1.1，http2.0</p>
+<blockquote>
+<p>1.1增加了长链接<br>2.0采用二进制格式，1.x采用文本的格式<br>1.0一个请求一个链接，1.1一次链接发多个请求，但是是串行的，会有阻塞的情况，2.0采用多路复用，解决1.1的阻塞问题。</p>
+</blockquote>
+</li>
+<li><p>TCP 三次握手</p>
+<blockquote>
+<p><img src="https://hsindumas.github.io/images/http-establish.png" alt><br>第三次握手确保，客户端不会因为网络问题，没有收到第二次握手的信息，而导致链接并没有建立成功。</p>
+</blockquote>
+</li>
+<li><p>TCP 四次挥手</p>
+<blockquote>
+<p><img src="https://hsindumas.github.io/images/http-close.png" alt><br>TIME_WAIT状态就是用来重发可能丢失的ACK报文<br>TIME_WAIT是主动关闭，CLOSE_WAIT是被动关闭</p>
+</blockquote>
+</li>
+<li><p>TCP和HTTP</p>
+<blockquote>
+<p>TCP是底层通信协议，规定数据传输和链接的方式<br>HTTP是应用层协议，规定数据内容的方式</p>
+</blockquote>
+</li>
+<li><p>https</p>
+<blockquote>
+<p>客户端发给请求给服务器，服务器返回证书，包含公钥。然后客户端校验后生成客户端密钥，并用公钥加密再传给服务器，服务器用服务器密钥解密后获得客户端密钥，用客户端密钥加密传输的数据，客户端拿到数据去解密。</p>
+</blockquote>
+</li>
 </ol>
 <h2 id="io"><a href="#io" class="headerlink" title="io"></a>io</h2><ol>
 <li><p>io的理解</p>
 <blockquote>
-<p>BIO的情况下，轮询是否有IO操作，没有的话就进行下一个轮询，都轮询完再进行下一轮。基于字节流和字符流。<br>NIO的情况下，Selector管理多个信道，当有信道需要IO操作的时候，会通知Selector。基于Channel、Buffer。<br>NIO三大核心Channel、Buffer、Selector。</p>
+<p>IO，使用多路复用，但是需要轮询是否有IO操作，基于字节流和字符流。使用select/poll<br>NIO，三大核心Channel、Buffer、Selector。Selector管理多个信道，当有信道需要IO操作的时候，会通知Selector。基于Channel、Buffer。使用epoll。<br>AIO相对于NIO来说，不需要程序自己赋值数据到用户空间，以及通过设置回调函数的方式而不用程序自己调用处理逻辑。</p>
 </blockquote>
 </li>
 <li><p>epoll和select区别</p>
 <blockquote>
 <p>epoll 是一种信号通知的被动机制，而select是需要主动轮询。</p>
+</blockquote>
+</li>
+<li><p>Java IO流的层次结构</p>
+<blockquote>
+<p>字节流是InputStream,OutputStream<br>字符流是Writer,Reader</p>
+</blockquote>
+</li>
+<li><p>FileInputStream在使用完以后，不关闭流，想二次使用可以怎么操作</p>
+<blockquote>
+<p>使用反射的方式，首先判断inputStream有没有读完，当读完时，利用反射去调内部open方法去第二次打开文件。 </p>
+</blockquote>
+</li>
+<li><p>Reactor模型</p>
+<blockquote>
+<p>Reactor单线程模型:<br><img src="https://hsindumas.github.io/images/reactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt><br>Reactor多线程模型:<br><img src="https://hsindumas.github.io/images/reactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt><br>主从Reactor多线程模型:<br><img src="https://hsindumas.github.io/images/%E4%B8%BB%E4%BB%8Ereactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png" alt></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><ol>
+<li><p>分布式集群下如何做到唯一序列号</p>
+<blockquote>
+<p>mysql自增，也可以设置步长。<br>redis利用单线程的特性，可以和mysql一样设置步长<br>使用uuid，排序效率低<br>mongodb使用的objectid算法</p>
+</blockquote>
+</li>
+<li><p>设计一个秒杀系统</p>
+<blockquote>
+<p>分流，再牛逼的机器也抵挡不住高级别的并发<br>限流，秒杀商品有限，防刷的前提下没有绝对的公平，比如guava的RateLimiter进行限流，设置每秒多少个令牌。<br>缓存，尽量不要让大量请求穿透到DB层，活动开始前商品信息可以推送至分布式缓存<br>异步，分析并识别出可以异步处理的逻辑，比如日志，缩短系统响应时间</p>
+</blockquote>
+</li>
+<li><p>redis实现队列</p>
+<blockquote>
+<p>用List去实现，RPUSH，LPOP 尾部插入，头部取出。行程队列的模式</p>
+</blockquote>
+</li>
+<li><p>redis实现分布式锁</p>
+<blockquote>
+<p>setnx，只有key不存在的情况下才能set成功。<br>为了避免线程挂掉没有del去释放锁，从而造成的死锁，建议给key设置一个过期时间。<br>极端情况expire还没设置线程就挂了，从而造成死锁，使用redis新的api ，set的时候key，value，过期时间，以及是不是nx都是可以设置的。<br>极端情况，过期时间小于任务完成的时间，导致真正删除的时候，并不是自己获得的锁。可以把唯一标识放进value中，del之前先校验。但是这种情况下仍然会有两个线程同时进入代码块，想办法重新设置过期时间来给锁续命。</p>
+</blockquote>
+</li>
+<li><p>zookeeper实现分布式锁</p>
+<blockquote>
+<p>多个jvm再同一个节点下创建临时有序节点，序号最小的先获得锁，等任务结束删除了节点zookeeper会通知，被listener监听到后序号最小的获得锁。</p>
+</blockquote>
+</li>
+<li><p>分布式锁redis和zookeeper比较</p>
+<blockquote>
+<p>redis性能高，小心死锁<br>zookeeper 可以重入，阻塞锁，可以释放锁。创建临时节点，如果客户端退出，节点也会被删除，相当于锁释放。</p>
+</blockquote>
+</li>
+<li><p>高并发框架设计</p>
+<blockquote>
+<p>分层，应用层-服务层-数据层<br>分割，按照业务功能分 </p>
+</blockquote>
+</li>
+<li><p>设计和实现一个LRU（最近最少使用）缓存数据结构</p>
+<blockquote>
+<p>直接继承LinkedHashMap，调用super的构造函数，并设置以访问的顺序排序，重写removeEldestEntry方法，如果大于容量就返回true，如果要求没有的话返回-1就需要重写get方法。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">Integer</span>, <span class="title">Integer</span>&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(capacity, <span class="number">0.75F</span>, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getOrDefault(key, -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;Integer, Integer&gt; eldest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size() &gt; capacity; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自己动手写一个简单的阻塞队列</p>
+<blockquote>
+<p>利用ReentrantLock进行加锁，以及使用ArrayList(add,get)或者LinkedList(add,pop)实现队列</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleBlockingQueue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> List&lt;Integer&gt; container = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">  <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Condition conditionNull = lock.newCondition();</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Condition conditionFull = lock.newCondition();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Integer item)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (item == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    &#125;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">"添加元素:"</span> + item);</span><br><span class="line">      ++count;</span><br><span class="line">      container.add(item);</span><br><span class="line">      System.out.println(<span class="string">"唤醒阻塞线程..."</span>);</span><br><span class="line">      conditionNull.signal();</span><br><span class="line">      Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">"添加方法释放锁..."</span>);</span><br><span class="line">      <span class="comment">// 手动释放锁</span></span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> Integer <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"队列元素为空，进入阻塞..."</span>);</span><br><span class="line">          conditionNull.await();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;</span><br><span class="line">        System.out.println(<span class="string">"出现异常，唤醒阻塞线程conditionNull"</span>);</span><br><span class="line">        conditionNull.signal();</span><br><span class="line">        <span class="keyword">throw</span> ie;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      --count;</span><br><span class="line">      Integer x = container.get(<span class="number">0</span>);</span><br><span class="line">      System.out.println(<span class="string">"取出方法取出元素:"</span> + x);</span><br><span class="line">      conditionFull.signal();</span><br><span class="line">      <span class="keyword">return</span> x;</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">"取出方法释放锁..."</span>);</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分布式系统统一登录模块设计</p>
+<blockquote>
+<p>使用redis存储session<br>spring session可以配置 store-type 为redis</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="dobbo"><a href="#dobbo" class="headerlink" title="dobbo"></a>dobbo</h2><ol>
+<li><p>Dubbo的原理</p>
+<blockquote>
+<p>Doubbo使用的rpc协议，Spring Cloud使用的是rest协议<br>客户端通过注册发现获取provider的地址，然后根据策略去选择一个provider发送请求。请求封装好的一个对象，里面设置了具体的方法以及参数之类，服务端根据接收的对象去做相应的处理。<br>快速失败的策略是只发起一次调用，失败立即报错。</p>
+</blockquote>
+</li>
+<li><p>RPC 请求的流程是什么</p>
+<blockquote>
+<p>服务消费方（client）调用以本地调用方式调用服务<br>client stub接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体<br>client stub找到服务地址，并将消息发送到服务端<br>server stub收到消息后进行解码<br>server stub根据解码结果调用本地的服务<br>本地服务执行并将结果返回给server stub<br>server stub将返回结果打包成消息并发送至消费方<br>client stub接收到消息，并进行解码<br>服务消费方得到最终结果</p>
+</blockquote>
+</li>
+<li><p>编程中自己都怎么考虑一些设计原则的</p>
+<blockquote>
+<p>类包括接口类尽量单一功能，减少耦合。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h2><ol>
+<li><p>mybatis原理</p>
+</li>
+<li><p>MyBatis缓存</p>
+<blockquote>
+<p>一级缓存是sqlSession级，sqlSession之间不共享<br>二级缓存可以共享</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="mq"><a href="#mq" class="headerlink" title="mq"></a>mq</h2><ol>
+<li><p>RocketMQ</p>
+<blockquote>
+<p>公司现在使用的是RocketMQ，但是我到公司的时候就已经运行了。有问过为什么选这个，老员工说是用JAVA写的，有问题可以自己看代码。<br>公司主要用来发送客户端的推送，以及一些统计日志。<br>生产者设置一个topic，然后发送给mq，消费者起监听去获取这个topic的任务，然后拿来消费。</p>
+</blockquote>
+</li>
+<li><p>怎么实现顺序消费</p>
+<blockquote>
+<p>参考 <a href="https://www.cnblogs.com/telwanggs/p/10737524.html" target="_blank" rel="noopener">https://www.cnblogs.com/telwanggs/p/10737524.html</a><br>比如两个任务需要按照顺序执行，如果发送到不同的mqserver是没办法控制顺序的，但是按照顺序发送到同一个mqserver也是有问题的，会被不一样的消费者消费，而这个顺序是不可控的。最终的解决方案是取一个唯一id，两个任务都传这个id给mqserver，mqserver在选择消费者的时候用id和消费者数量取余数，这样就限制了相同id的任务只会被同一个消费者消费，从而达到顺序消费的效果。</p>
+</blockquote>
+</li>
+<li><p>消息重复的解决办法</p>
+<blockquote>
+<p>幂等性，消息多次消费跟只消费一次的效果要一样<br>使用日志表，用id标识，做过的任务忽略</p>
+</blockquote>
+</li>
+<li><p>事务</p>
+<blockquote>
+<p>一般使用Spring的事务解决。RocketMQ的事务如果消费端出现了问题，mq是不会处理的，只能自己回滚，反而会比较麻烦。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><ol>
+<li><p>redis的list操作</p>
+<blockquote>
+<p>LPUSH,RPUSH,LPOP,RPOP,LLEN,LRANGE</p>
+</blockquote>
+</li>
+<li><p>redis的数据结构</p>
+<blockquote>
+<p>string,hash, list, set, sortSet(排名:zadd,zscore,zrevrange)</p>
+</blockquote>
+</li>
+<li><p>淘汰策略</p>
+<blockquote>
+<p>noeviction:  当内存使用达到阈值的时候，所有引起申请内存的命令会报错。<br>allkeys-lru:在主键空间中，优先移除最近未使用的key。<br>volatile-lru：在设置了过期时间的键空间中，优先移除最近未使用的key。<br>allkeys-random：在主键空间中，随机移除某个key。<br>volatile-random：在设置了过期时间的键空间中，随机移除某个key。<br>volatile-ttl：在设置了过期时间的键空间中，具有更早过期时间的key优先移除。</p>
+</blockquote>
+</li>
+<li><p>redis和memcached的区别</p>
+<blockquote>
+<p>redis支持的数据结构更多，速度更快，而且可以持久化数据</p>
+</blockquote>
+</li>
+<li><p>redis是单线程的么，所有的工作都是单线程么</p>
+<blockquote>
+<p>不是，只是使用了一个线程处理网络请求，其他模块仍然是多个线程</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="es"><a href="#es" class="headerlink" title="es"></a>es</h2><ol>
+<li>elasticsearch 了解多少<blockquote>
+<p>是一个分布式的搜索服务器，支持rest api。<br>我们公司目前业务中的用户搜索和高校搜索是使用es的，搜索的时候也可以根据经纬度进行排序。es的版本升级正好是我做的，线上用的7.2.0版本，我是搭建了四台服务，用户数据和高校数据通过logstash定时从mysql导入es。索引是两个一个user,一个school。user是有将近400万的数据，1.3G。一个主分片一个次分片。</p>
 </blockquote>
 </li>
 </ol>
@@ -1328,7 +1585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA基础"><span class="nav-number">1.</span> <span class="nav-text">JAVA基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">2.</span> <span class="nav-text">tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">3.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">4.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">5.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">7.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io"><span class="nav-number">8.</span> <span class="nav-text">io</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA基础"><span class="nav-number">1.</span> <span class="nav-text">JAVA基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat"><span class="nav-number">2.</span> <span class="nav-text">tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-number">3.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM"><span class="nav-number">4.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">5.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">7.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http"><span class="nav-number">8.</span> <span class="nav-text">http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#io"><span class="nav-number">9.</span> <span class="nav-text">io</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计"><span class="nav-number">10.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dobbo"><span class="nav-number">11.</span> <span class="nav-text">dobbo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis"><span class="nav-number">12.</span> <span class="nav-text">mybatis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mq"><span class="nav-number">13.</span> <span class="nav-text">mq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis"><span class="nav-number">14.</span> <span class="nav-text">redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#es"><span class="nav-number">15.</span> <span class="nav-text">es</span></a></li></ol></div>
             
 
           </div>

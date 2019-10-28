@@ -479,7 +479,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-23 21:20:05" itemprop="dateModified" datetime="2019-10-23T21:20:05+08:00">2019-10-23</time>
+                <time title="修改时间：2019-10-28 23:22:17" itemprop="dateModified" datetime="2019-10-28T23:22:17+08:00">2019-10-28</time>
               </span>
             
           
@@ -518,34 +518,32 @@
       
         
           <h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
-<li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
+<li><p>HashMap的源码。</p>
+<blockquote>
+<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
+</blockquote>
 </li>
-<li><p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。</p>
+<li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
+<blockquote>
+<p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
+</blockquote>
 </li>
 <li><p>JAVA 四中引用类型</p>
 <blockquote>
-<p>强引用<br>软引用(SoftReference)，当内存不足的时候会被回收<br>弱引用(WeakReference)，只要gc就被回收<br>虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状态。</p>
+<p>强引用<br>软引用(SoftReference)，当内存不足的时候会被gc回收<br>弱引用(WeakReference)，只要gc就被回收<br>虚引用(PhantomReference)，必须和引用队列联合使用。主要作用是跟踪对象被gc的状态。</p>
 </blockquote>
-</li>
-<li><p>java中四种修饰符的限制范围。</p>
 </li>
 <li><p>Object类中的方法。</p>
-</li>
-<li><p>接口和抽象类的区别</p>
 <blockquote>
-<p>jdk8新增默认方法和静态方法<br>jdk9增加private method 和 private static method，在有了这两个以后，接口和抽象类的区别，只剩下构造器，成员变量，以及单继承。<br>接口没有构造函数，可以多继承，成员变量只能public<br>抽象类有构造函数，单继承，成员变量可以private</p>
+<p>clone(),equals(object),finalize(),getClass(),hashCode(),notify(),notifyAll(),toString(),wait()</p>
 </blockquote>
 </li>
-<li><p>Java序列化的方式</p>
-</li>
-<li><p>传值和传引用的区别，Java是怎么样的，有没有传值引用。</p>
-</li>
-<li><p>一个ArrayList在循环过程中删除，会不会出问题，为什么。</p>
+<li><p>负载均衡算法除了随机和轮询以外的一致性hash算法</p>
 <blockquote>
-<p>ArrayList.remove 没有更新modCount<br>Iterator.remove 有更新modCount</p>
+<p>整个hash空间设计成圆环形，每个服务根据算法获得一个hash值，然后分布在圆环上，对服务的请求对象也用同样地算法分布在圆环上，然后以顺时针的方向去找自己最近的服务，然后调用。如果一个服务宕机，就顺时针往下找，如果新增的话也只影响部分请求。</p>
 </blockquote>
 </li>
-<li><p>红黑树和B树的区别</p>
+</ol>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -557,7 +555,7 @@
           <!--/noindex-->
         
       
-    </li></ol></div>
+    </div>
 
     
 
