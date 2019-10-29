@@ -479,7 +479,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-28 23:22:17" itemprop="dateModified" datetime="2019-10-28T23:22:17+08:00">2019-10-28</time>
+                <time title="修改时间：2019-10-29 22:40:59" itemprop="dateModified" datetime="2019-10-29T22:40:59+08:00">2019-10-29</time>
               </span>
             
           
@@ -520,12 +520,12 @@
           <h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
 <li><p>HashMap的源码。</p>
 <blockquote>
-<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
+<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样做&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
 </blockquote>
 </li>
 <li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
 <blockquote>
-<p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
+<p>HashMap是线程不安全的，HashMap在高并发下的put操作因为用头插法会导致列表死循环，jdk1.8优化过后保持和原链表顺序一致解决死循环的问题，但是仍然有数据丢失的弊端。<br>HashTable是对在方法上加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
 </blockquote>
 </li>
 <li><p>JAVA 四中引用类型</p>

@@ -109,12 +109,12 @@
 
 
 
-  <meta name="description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
+  <meta name="description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样做&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的m">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Interview-Note">
 <meta property="og:url" content="https://hsindumas.github.io/2019/10/22/Interview-Note/index.html">
 <meta property="og:site_name" content="Hsin Dumas">
-<meta property="og:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
+<meta property="og:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样做&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的m">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsindumas.github.io/images/IOC%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.png">
 <meta property="og:image" content="https://hsindumas.github.io/images/Thread.png">
@@ -123,10 +123,10 @@
 <meta property="og:image" content="https://hsindumas.github.io/images/reactor%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="https://hsindumas.github.io/images/reactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
 <meta property="og:image" content="https://hsindumas.github.io/images/%E4%B8%BB%E4%BB%8Ereactor%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:updated_time" content="2019-10-28T15:22:17.820Z">
+<meta property="og:updated_time" content="2019-10-29T14:40:59.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Interview-Note">
-<meta name="twitter:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的">
+<meta name="twitter:description" content="JAVA基础 HashMap的源码。  数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。扩容是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样做&amp;amp;运算会导致很多index没有被利用，造成浪费。HashSet的底层就是用的HashMap，contains就是用的m">
 <meta name="twitter:image" content="https://hsindumas.github.io/images/IOC%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.png">
 
 
@@ -487,7 +487,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-28 23:22:17" itemprop="dateModified" datetime="2019-10-28T23:22:17+08:00">2019-10-28</time>
+                <time title="修改时间：2019-10-29 22:40:59" itemprop="dateModified" datetime="2019-10-29T22:40:59+08:00">2019-10-29</time>
               </span>
             
           
@@ -527,12 +527,12 @@
         <h2 id="JAVA基础"><a href="#JAVA基础" class="headerlink" title="JAVA基础"></a>JAVA基础</h2><ol>
 <li><p>HashMap的源码。</p>
 <blockquote>
-<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容都是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样坐&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
+<p>数组加链表的结构，JDK1.8之后引入红黑树，达到阀值转树或者拆树。<br>扩容是double size。保持2的N次幂。因为决定inde位置的时候用的是hashcode%(size-1)。如果是17这种当减了1之后就是(10000)，这样做&amp;运算会导致很多index没有被利用，造成浪费。<br>HashSet的底层就是用的HashMap，contains就是用的map的containsKey，add就是用的map的put，只是value用的是new Object()。 </p>
 </blockquote>
 </li>
 <li><p>ConcurrentHashMap原理，JDK1.8都有什么新特性</p>
 <blockquote>
-<p>HashMap是线程不安全的，HashMap在高并发下的put操作会导致列表死循环，不过jdk有优化<br>HashTable是对整个加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
+<p>HashMap是线程不安全的，HashMap在高并发下的put操作因为用头插法会导致列表死循环，jdk1.8优化过后保持和原链表顺序一致解决死循环的问题，但是仍然有数据丢失的弊端。<br>HashTable是对在方法上加锁，效率不高<br>ConcurrentHashMap，在1.6的时候采用 Segment+ReentrantLock（Segment继承ReentrantLock） ，每一段加锁，减少并发的冲突。但是竞争同一个锁的概率非常小，以及多个分段锁所占用的空间，所以在1.8的时候从分段锁改成CAS+Synchronized(对每个node)，对每一个node都使用volatile关键字，进一步细化了锁。</p>
 </blockquote>
 </li>
 <li><p>JAVA 四中引用类型</p>
@@ -556,21 +556,22 @@
 <ol start="6">
 <li><p>接口和抽象类的区别</p>
 <blockquote>
-<p>jdk8新增默认方法和静态方法<br>jdk9增加private method 和 private static method，在有了这两个以后，接口和抽象类的区别，只剩下构造器，成员变量，以及单继承。<br>接口没有构造函数，可以多继承，成员变量只能public<br>抽象类有构造函数，单继承，成员变量可以private</p>
+<p>jdk1.8接口新增默认方法和静态方法<br>jdk1.9接口增加private method 和 private static method，在有了这两个以后，接口和抽象类的区别，只剩下构造器，成员变量，以及单继承。<br>接口没有构造函数，可以多继承，成员变量只能public<br>抽象类有构造函数，单继承，成员变量可以private</p>
 </blockquote>
 </li>
 <li><p>Java序列化的方式</p>
+<blockquote>
+<p>实现Serializable接口，会自动序列化所有非static和非transient的成员变量。<br>实现Externalizable接口，必须实现writeExternal()和readExternal()方法，相当于手动序列化。<br>实现Serializable接口+添加writeObject()和readObject()方法。不是override，而是添加这两个方法，不过方法的第一行要调用defaultWriteObject或者defaultReadObject，然后再自己控制。</p>
+</blockquote>
 </li>
 <li><p>传值和传引用的区别，Java是怎么样的，有没有传值引用。</p>
+<blockquote>
+<p>基本类型（byte,short,int,long,double,float,char,boolean）为传值；对象类型（Object，数组，容器）为传引用；String、Integer、Double等类型因为类被设为final，无法被修改，只能重新赋值或生成对象。</p>
+</blockquote>
 </li>
 <li><p>一个ArrayList在循环过程中删除，会不会出问题，为什么。</p>
 <blockquote>
 <p>ArrayList.remove 没有更新modCount<br>Iterator.remove 有更新modCount</p>
-</blockquote>
-</li>
-<li><p>transient</p>
-<blockquote>
-<p>不参与序列化</p>
 </blockquote>
 </li>
 <li><p>Long,Integer 包装类型常量 cache 为 -128 到 127 之间</p>
@@ -583,11 +584,6 @@
 <li><p>缓存击穿</p>
 <blockquote>
 <p>比如用户不在数据库中，返回null，缓存不存的话就一直访问数据库。布隆过滤，生成一个bitmap，拦截肯定不存在的数据，或者把null也保存到缓存中，过期时间可以设置短一点。</p>
-</blockquote>
-</li>
-<li><p>HashSet的底层是HashMap</p>
-<blockquote>
-<p>get() 方法其实就是用的 containsKey 的方法。</p>
 </blockquote>
 </li>
 <li><p>二叉查找树 -&gt; 二叉平衡树 -&gt; 红黑树</p>
@@ -607,17 +603,9 @@
 </li>
 <li><p>Throwable</p>
 <blockquote>
-<p>Throwable 是超类，下层有 error 和 exception ， error 不是应用抛出的，是系统内部出错。 exception 分成 RuntimeException 和 CheckedException 。</p>
+<p>Throwable 是超类，下层有 error 和 exception ， error 不是应用抛出的，是系统内部出错。 exception 分成 RuntimeException 和 CheckedException 。<br>RuntimeException : ClassCastException， IndexOutOfBoundsException， NullPointerException， UnsupportedOperationException , ArithmeticException<br>checkedException : IOException, SQLException , ClassNotFoundException</p>
 </blockquote>
 </li>
-</ol>
-<blockquote>
-<p>RuntimeException : ClassCastException， IndexOutOfBoundsException， NullPointerException， UnsupportedOperationException , ArithmeticException </p>
-</blockquote>
-<blockquote>
-<p>checkedException : IOException, SQLException , ClassNotFoundException</p>
-</blockquote>
-<ol start="19">
 <li><p>泛型的好处</p>
 <blockquote>
 <p>没有泛型的时候只有Object，导致需要显式的强转类型，ClassCastException又是RuntimeException, 不容易被发现导致服务出错。</p>
@@ -637,22 +625,24 @@
 <blockquote>
 <p>静态变量和代码块一起-&gt;非静态变量和构造函数</p>
 </blockquote>
-<h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2></li>
-<li><p>tomcat加载隔离</p>
+</li>
+</ol>
+<h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><ol>
+<li><p>tomcat加载隔离 </p>
 <blockquote>
-<p>tomcat的加载顺序是 BootStrapClassLoader -&gt; CustomClassLoader(WEB-INF/classes) -&gt; CustomClassLoader(WEB-INF/lib) -&gt; CommonClassloader(tomcat\lib)。所以要用公共的jar还得把自己目录下的jar删除<br>tomcat没有遵守双亲委派机制。自定义了 CommonClassloader 、CatalinaClassLoader、 SharedClassLoader,但是tomcat的默认配置catalina.properties里面只配了common，所以 CatalinaClassLoader 和 SharedClassLoader 其实是空的，不过都设置了 parent 是 CommonClassloader。<br>在tomcat中都是通过扩展URLClassLoader来实现自己的类加载器。</p>
+<p>tomcat的加载顺序是 BootStrapClassLoader -&gt;  WebappClassLoader(WEB-INF/classes) -&gt;  WebappClassLoader (WEB-INF/lib) -&gt; CommonClassloader(tomcat\lib)。所以要用公共的jar还得把自己目录下的jar删除<br>tomcat没有遵守双亲委派机制。自定义了 CommonClassloader 、CatalinaClassLoader、 SharedClassLoader,但是 tomcat/conf/catalina.properties 的默认配置只配了common，所以 CatalinaClassLoader 和 SharedClassLoader 其实是空的，不过代码中createClassLoader的时候设置了 parent 是 CommonClassloader。<br>在tomcat中都是通过扩展URLClassLoader来实现自己的类加载器。</p>
 </blockquote>
 </li>
 <li><p>tomcat结构</p>
 <blockquote>
-<p>参考 <a href="https://blog.csdn.net/xlgen157387/article/details/79006434" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/79006434</a><br>一个server有多个service，一个service有多个connector，但只有一个container<br>service是对外提供服务<br>connector是接受请求并封装成Request和Response<br>container是封装和管理servlet，以及处理request请求。<br>请求流程 ：请求-&gt;service-&gt;connector-&gt;container-&gt;connector-&gt;client<br>connector使用ProtocolHandler处理请求，ProtocolHandler包含 Endpoint、Processor、Adapter。<br>connector流程 ：EndPoint处理底层Socket网络请求，Processor将EndPoint接受的socket封装成Request，Adapter用于将request交给Container进行具体的处理。<br>一个service一个Engine，一个Engine可以有多个host，host对应tomcat目录的webapps，一般就一个。一个host可以有多个Context，对应webapps下面的ROOT目录以及同级其他目录。<br>request-&gt;container-&gt;EnginePipline-&gt;EngineValve1,EngineValve2…-&gt;StandardEngineValve-&gt;HostPipeline-&gt;Hostvalve1,Hostvalve2…-&gt;StandardHostValve-&gt;ContextPipeline-&gt;ContextValve1,ContextValve2…-&gt;StandardContextValve-&gt;WrapperPipeline-&gt;WrappedValve1,WrappedValve2…-&gt;StandardWrappedValve-&gt;创建FilterChain-&gt;doFilter-&gt;Connector-&gt;client</p>
+<p>参考 <a href="https://blog.csdn.net/xlgen157387/article/details/79006434" target="_blank" rel="noopener">https://blog.csdn.net/xlgen157387/article/details/79006434</a><br>一个server有多个service，一个service有多个connector，但只有一个container<br>service是对外提供服务<br>connector是接受请求并封装成Request和Response<br>container是封装和管理servlet，以及处理request请求。<br>请求流程 ：请求-&gt;service-&gt;connector-&gt;container-&gt;connector-&gt;client<br>connector使用ProtocolHandler处理请求，根据协议进行不通的处理，比如http或者socket，ProtocolHandler包含 Endpoint、Processor、Adapter。<br>connector流程 ：EndPoint处理底层Socket网络请求，Processor将EndPoint接受的socket封装成Request，Adapter将request交给Container进行具体的处理。<br>一个 Container 一个Engine，一个Engine可以有多个host，host对应tomcat目录的webapps，一般就一个。一个host可以有多个Context，对应webapps下面的ROOT目录以及同级其他目录。一个context下面有多个wrapper，每一个都封装一个servlet。<br>request-&gt;container-&gt;EnginePipline-&gt;EngineValve1,EngineValve2…-&gt;StandardEngineValve-&gt;HostPipeline-&gt;Hostvalve1,Hostvalve2…-&gt;StandardHostValve-&gt;ContextPipeline-&gt;ContextValve1,ContextValve2…-&gt;StandardContextValve-&gt;WrapperPipeline-&gt;WrappedValve1,WrappedValve2…-&gt;StandardWrappedValve-&gt;创建FilterChain-&gt;doFilter-&gt;Connector-&gt;client</p>
 </blockquote>
 </li>
 </ol>
 <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><ol>
 <li><p>spring五种作用域</p>
 <blockquote>
-<p>singleton,prototype(每次使用都创建),request,session,global session</p>
+<p>singleton,prototype(每次使用都创建),request,session,global session(仅适用于Spring portlet MVC)</p>
 </blockquote>
 </li>
 <li><p>Spring Bean的生命周期</p>
@@ -672,23 +662,9 @@
 </li>
 <li><p>spring AOP是如何实现的</p>
 <blockquote>
-<p>@Aspect,@PointCut,@AfterReturning,@AfterThrowing</p>
+<p>@Aspect,@PointCut,@AfterReturning,@AfterThrowing<br>是利用JDK的动态代理以及CGLIB实现的，JDK的需要目标对象实现接口，CGLIB是通过继承目标对象实现的。<br>如果实现了接口，默认是JDK，但是也可以指定CGLIB。Proxy利用 InvocationHandler 动态创建一个符合某一接口的实例，生成目标类的代理对象。<br>如果没有实现接口，只能是CGLIB。<br>JDK,CGLIB 都不能用final和private修饰</p>
 </blockquote>
 </li>
-</ol>
-<blockquote>
-<p>是利用JDK的动态代理以及CGLIB实现的，JDK的需要目标对象实现接口，CGLIB是通过继承目标对象实现的。</p>
-</blockquote>
-<blockquote>
-<p>如果实现了接口，默认是JDK，但是也可以指定CGLIB。Proxy利用InvocationHandler动态创建一个符合某一接口的实例，生成目标类的代理对象。</p>
-</blockquote>
-<blockquote>
-<p>如果没有实现接口，只能是CGLIB。</p>
-</blockquote>
-<blockquote>
-<p>JDK,CGLIB 都不能用final和private修饰</p>
-</blockquote>
-<ol start="6">
 <li><p>Spring MVC原理</p>
 <blockquote>
 <p>HttpRequest-&gt;DispatcherServlet-&gt;HandlerMapping-&gt;controller-&gt;service-&gt;ModelAndView-&gt;DispatcherServlet-&gt;ViewResolver-&gt;Model-&gt;View-&gt;HttpResponse</p>
@@ -696,38 +672,12 @@
 </li>
 <li><p>Spring 事务</p>
 <blockquote>
-<p>Spring Boot中Propagation(传播行为)默认是DEFAULT，timeout是-1，readOnly是false，isolation是DEFULT</p>
+<p>Spring Boot中Propagation(传播行为)默认是 REQUIRED，timeout是-1，readOnly是false，isolation是DEFULT(按数据库的隔离等级)<br>事务隔离和数据库的四个隔离等级对应。<br>传播行为如下<br>REQUIRED: 当前事务优先，做完再新增。<br>SUPPORTS: 当前事务优先，没有就以非事务的方式执行。<br>MANDATORY: 当前事务优先，没有就抛出异常。<br>REQUIRES_NEW : 新建一个事务，先做新的事务，再做老的事务。<br>NOT_SUPPORTED: 以非事务的方式进行，如果当前存在事务，则把当前事务挂起<br>NEVER: 以非事务方式运行，如果当前存在事务，则抛出异常<br>NESTED: 如果当前存在事务，则创建一个事务作为当前事务的子事务来运行。没有就新增。</p>
 </blockquote>
 </li>
-</ol>
-<blockquote>
-<p>事务隔离和数据库的四个隔离等级对应。</p>
-</blockquote>
-<blockquote>
-<p>REQUIRES: 如果有事务就加入，没有就新增。</p>
-</blockquote>
-<blockquote>
-<p>REQUIRES_NEW : 创建一个新的事物，如果存在事务就挂起</p>
-</blockquote>
-<blockquote>
-<p>SUPPORTS: 如果有事务就加入，没有就以非事务的方式进行</p>
-</blockquote>
-<blockquote>
-<p>NOT_SUPPORTS: 以非事务的方式进行，如果当前存在事务，则把当前事务挂起</p>
-</blockquote>
-<blockquote>
-<p>NEVER: 以非事务方式运行，如果当前存在事务，则抛出异常</p>
-</blockquote>
-<blockquote>
-<p>MANDATORY: 如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。</p>
-</blockquote>
-<blockquote>
-<p>NESTED: 如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；没有就新增.</p>
-</blockquote>
-<ol start="8">
 <li><p>spring 的 controller 是单例，怎么保证并发的安全。</p>
 <blockquote>
-<p>不要在controller中定义成员变量，尽量是静态变量<br>可以修改scope设置成prototype<br>可以使用ThreadLocal</p>
+<p>不要在controller中定义成员变量，尽量是静态变量<br>可以使用ThreadLocal</p>
 </blockquote>
 </li>
 <li><p>Spring 的IOC 循环依赖</p>
@@ -744,12 +694,12 @@
 <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><ol>
 <li><p>元空间里有些啥</p>
 <blockquote>
-<p>方法区是JVM的规范，永久代是HotSpot对这种规范的实现。在 JDK 1.8 中， HotSpot 已经没有永久代了，取而代之的是 Metaspace（元空间）。元空间并不在虚拟机中，而是使用本地内存。</p>
+<p>Method Area是JVM的规范，永久代是HotSpot对这种规范的实现。在 JDK 1.8 中， HotSpot 已经没有永久代了，取而代之的是 Metaspace（元空间）。元空间并不在虚拟机中，而是使用本地内存。原来永久代里面除了类的元信息之外还有RuntimeConstantPool，现在metaspace只存元信息，RuntimeConstantPool放在了Heap内。</p>
 </blockquote>
 </li>
 <li><p>JVM 什么情况下会发生栈溢出。</p>
 <blockquote>
-<p>JAVA stack 或者叫VM Stack ，每个方法从调用到执行完成对应着一个栈帧从入栈到出栈的过程。当栈的深度大于虚拟机允许的深度时抛出StackOverflowError。<br>Native Stack 跟JAVA Stack一样，值得注意的是，HotSpot已经把这两个合并了。</p>
+<p>JAVA stack 或者叫VM Stack ，每个方法从调用到执行完成对应着一个栈帧从入栈到出栈的过程。当栈的深度大于虚拟机允许的深度时抛出StackOverflowError。<br>Native Method Stack 跟 JAVA Stack一样，值得注意的是，HotSpot已经把这两个合并了。</p>
 </blockquote>
 </li>
 <li><p>JVM 什么情况下会发生内存溢出。</p>
@@ -794,7 +744,7 @@
 </li>
 <li><p>类加载过程</p>
 <blockquote>
-<p>装载 :在内存中生成这个对象<br>验证 :确定Class文件的信息是否符合虚拟机的要求<br>准备： 为类变量分配内存和初始值，即在方法区中分配变量所使用的内存空间。如果是public static final int v = 8080;初始值是8080.如果没有final修饰就是0。<br>解析: 将常量池中的符号引用转为直接引用。符号引用的目标不一定已经加载到内存中，但是直接引用的目标肯定是在内存中的。<br>初始化: 如果类有父类，则先初始化父类，然后执行staic变量以及static代码块。<br>最终产品是在Heap中的class对象，封装了类在方法区中的数据结构，并提供访问数据结构的接口。</p>
+<p>装载 :在内存中生成这个对象<br>验证 :确定Class文件的信息是否符合虚拟机的要求<br>准备： 为类变量分配内存和初始值，即在方法区中分配变量所使用的内存空间。如果是public static final int v = 8080;初始值是8080.如果没有final修饰就是0。<br>解析: 将常量池中的符号引用转为直接引用。符号引用的目标不一定已经加载到内存中，但是直接引用的目标肯定是在内存中的。<br>初始化: 静态变量和静态代码块，成员变量和构造函数<br>最终产品是在Heap中的class对象，封装了类在方法区中的数据结构，并提供访问数据结构的接口。</p>
 </blockquote>
 </li>
 <li><p>类加载器</p>
