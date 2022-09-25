@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="HsinDumas">
+<meta name="description" content="人活着赖着一口氧气">
+<meta name="theme-color" content="#fff">
+<title>HsinDumas</title>
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/favicon.ico?v=1664086792902">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/css/mist.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/fonts/font-awesome.css">
+<link
+  href="//fonts.loli.net/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/styles/main.css">
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4d4ac451daeacc42e97c37609f7c2a76";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="mist">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper  " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="">
+              <span class="logo-line-before">
+                <i class=""></i>
+              </span>
+              <span class="main-title">HsinDumas</span>
+              <span class="logo-line-after">
+                <i class=""></i>
+              </span>
+            </a>  
+          
+        </div>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/" target="_self">
+                  <i class="fa fa-globe"></i> 首页
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives" target="_self">
+                  <i class="fa fa-globe"></i> 归档
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags" target="_self">
+                  <i class="fa fa-globe"></i> 标签
+                </a>
+              
+            </li>
+          
+            
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about" target="_self">
+                  <i class="fa fa-globe"></i> 关于
+                </a>
+              
+            </li>
+          
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout bg-color mist">
+      <div class="section-layout-wrapper">
+        <div id="sidebarMeta" class="sidebar">
+    
+<div class="sidebar-wrapper box-shadow-wrapper ">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/images/avatar.png"/>
+    <p class="site-author-name">HsinDumas</p>
+    
+    <div class="site-description right-motion">
+      
+        <p id="binft">人活着赖着一口氧气</p>
+      
+    </div>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+  
+    <div class="sidebar-item sidebar-item-social">
+      <div class="social-item">
+        
+          
+            <a href="https://github.com/HsinDumas">
+              <i class="fa fa-github-alt" title="github"></i>
+            </a>
+          
+        
+        
+      </div>
+    </div>
+  
+
+  
+
+
+
+</div>
+</div>
+<script>
+  let sidebarMeta = document.querySelector('#sidebarMeta');
+  let scheme = 'mist';
+  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
+  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
+    document.addEventListener('scroll', function(e) {
+      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
+        sidebarWrapper.classList.add('home-sidebar-fixed')
+      } else {
+        sidebarWrapper.classList.remove('home-sidebar-fixed')
+      }
+    });
+  }
+  </script>
+        <div class="section-box tag-line box-shadow-wrapper">
+          <section class="section tags-section posts-expand bg-color">
+            <div class="padding-wrapper">
+  <div class="tag-timeline-box">
+    <div class="tag-timeline-wrapper">
+      <div class="tag-timeline-title">
+        <h2>
+          Travel
+          <small class="language" data-lan="tag">标签</small>
+        </h2>
+      </div>
+      
+      
+      
+      <a href="https://HsinDumas.github.io/post/japan-travel-bill/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              07-07
+              <small>Japan Travel Bill</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+      <a href="https://HsinDumas.github.io/post/hk-travel-bill/">
+        <div class="motion-warpper">
+          <div class="tag-post-node">
+            <h1>
+              02-21
+              <small>HK Travel Bill</small>
+            </h1>
+          </div>
+        </div>
+      </a>
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    <center id="runTimeBox">
+      已运行:<span id="run_time"></span>
+    </center>
+    <span id="busuanzi_container_site_pv">浏览数:<span id="busuanzi_value_site_pv"></span> 次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">访客数:<span id="busuanzi_value_site_uv"></span> 人</span>
+
+    <script>
+      BirthDay = new Date('1994-02-17');
+      if (BirthDay.getTime()) {
+        function runTime() {
+          str = "";
+          today = new Date();
+          timeold = today.getTime() - BirthDay.getTime();
+          msPerDay = 24 * 60 * 60 * 1000;
+          e_daysold = timeold / msPerDay;
+          daysold = Math.floor(e_daysold);
+          str += daysold + "天";
+          return str;
+        }
+        setInterval(function () {
+          $("#run_time").html(runTime());
+        }, 1000);
+      } else {
+        document.querySelector('.footer').removeChild(document.querySelector('#runTimeBox'));
+      }
+    </script>
+    <div class="poweredby">
+      被你抓住啦 ❤️ HsinDumas
+    </div>
+  </footer>
+  
+    
+      <div class="drawer-box right" id="drawer_box">
+        <span class="muse-line muse-line-first"></span>
+        <span class="muse-line muse-line-middle"></span>
+        <span class="muse-line muse-line-last"></span>
+      </div>
+      
+        <div class="mist back-to-top" id="back_to_top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+        
+                  
+                        
+</div>
+<script>
+  let sideBarOpen = "sidebar-open";
+  let body = document.body;
+  let back2Top = document.querySelector("#back_to_top"),
+    back2TopText = document.querySelector("#back_to_top_text"),
+    drawerBox = document.querySelector("#drawer_box"),
+    rightSideBar = document.querySelector(".sidebar"),
+    viewport = document.querySelector("body");
+
+  function scrollAnimation(currentY, targetY) {
+    let needScrollTop = targetY - currentY;
+    let _currentY = currentY;
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10);
+      _currentY += dist;
+      window.scrollTo(_currentY, currentY);
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY);
+      } else {
+        window.scrollTo(_currentY, targetY);
+      }
+    }, 1);
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener("scroll", function (e) {
+    let percent =
+      (document.scrollingElement.scrollTop /
+        (document.scrollingElement.scrollHeight -
+          document.scrollingElement.clientHeight)) *
+      100;
+    if (percent > 1 && !back2Top.classList.contains("back-top-active")) {
+      back2Top.classList.add("back-top-active");
+    }
+    if (percent == 0) {
+      back2Top.classList.remove("back-top-active");
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+  let hasCacu = false;
+  window.addEventListener("resize", function (e) {
+    calcuHeight();
+  });
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (
+      (!hasCacu && back2Top.classList.contains("pisces")) ||
+      back2Top.classList.contains("gemini")
+    ) {
+      let sideBar = document.querySelector(".sidebar");
+      let navUl = document.querySelector("#site_nav");
+      sideBar.style =
+        "margin-top:" + (navUl.offsetHeight + navUl.offsetTop + 15) + "px;";
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false,
+    MOTION_TIME = 300,
+    RIGHT_MOVE_DIS = "320px";
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll(".right-motion");
+    let right = drawerBox.classList.contains("right");
+
+    let transitionDir = right
+      ? "transition.slideRightIn"
+      : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingRight: "0px",
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS,
+      };
+      closeProp = {
+        paddingLeft: "0px",
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      jQuery.Velocity(rightSideBar, "stop");
+      jQuery.Velocity(viewport, "stop");
+      jQuery.Velocity(rightMotions, "stop");
+      if (open) {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: RIGHT_MOVE_DIS,
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, transitionDir, {});
+            },
+          }
+        );
+        jQuery.Velocity(viewport, openProp, {
+          duration: MOTION_TIME,
+        });
+      } else {
+        jQuery.Velocity(
+          rightSideBar,
+          {
+            width: "0px",
+          },
+          {
+            duration: MOTION_TIME,
+            begin: function () {
+              jQuery.Velocity(rightMotions, {
+                opacity: 0,
+              });
+            },
+          }
+        );
+        jQuery.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME,
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle("muse-line");
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    };
+  }
+
+  // 链接跳转
+  let newWindow = "true";
+  if (newWindow === "true") {
+    let links = document.querySelectorAll(".post-body a");
+    links.forEach((item) => {
+      if (!item.classList.contains("btn")) {
+        item.setAttribute("target", "_blank");
+      }
+    });
+  }
+
+  let faSearch = document.querySelector("#fa_search");
+  faSearch &&
+    faSearch.addEventListener("click", function () {
+      document.querySelector("#search_mask").style = "";
+    });
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+
+  // 离开当前页title变化
+  var leaveTitle = "你抓不到我😁";
+  var normal_title = document.title;
+  if (leaveTitle) {
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState == "hidden") {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/css/jquery.fancybox.css" />
+<script src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/jquery.fancybox.js"></script>
+
+<script>
+  let images = document.querySelectorAll(".section img");
+  images.forEach((image) => {
+    var parent = image.parentElement;
+    var next = image.nextElementSibling;
+    parent.removeChild(image);
+    var aelem = document.createElement("a");
+    aelem.href = image.src;
+    aelem.dataset["fancybox"] = "images";
+    aelem.dataset["rel"] = "fancybox-button";
+    aelem.classList.add("fancybox");
+    aelem.appendChild(image);
+    parent.insertBefore(aelem, next);
+  });
+</script>
+  </div>
+</body>
+
+  <div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://HsinDumas.github.io/post/japan-travel-bill/"" data-c="
+          &lt;h1 id=&#34;日本-12-天-11-晚流水账单&#34;&gt;日本 12 天 11 晚流水账单&lt;/h1&gt;
+&lt;h1 id=&#34;行程&#34;&gt;行程&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;日期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;星期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;城市&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;行程&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.9&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;五&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;安顿&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.10&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;六&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪 - 东京&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;浅草寺、天空树塔、秋叶原， JRPASS 开始&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;日&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;东京&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;新宿&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;一&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;东京&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.13&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;二&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;东京 - 大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;黑门市场&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.14&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;三&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;环球影城&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.15&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;四&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;心斋桥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.16&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;五&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪 - 奈良 - 大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪历史博物馆、奈良，JRPASS 结束&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.17&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;六&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪 - 京都&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;新京极&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.18&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;日&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;京都&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;清水寺&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.19&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;一&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;京都&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;和服体验、伏见稻荷大社&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.20&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;二&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;京都 - 大阪&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大阪回南京&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;准备工作&#34;&gt;准备工作&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）日本签证，两人&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;496&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（吉祥航空）机票，南京大阪双人来回&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7508&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）ICOCA 卡，两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;259.95&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）JRPASS	3420&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）电话卡&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;168&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）8.9-8.10 大阪本町万豪慕奇夕酒店&lt;br&gt;Moxy Osaka Honmachi by Marriott&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;782.69&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）8.10-8.13 东京锦系町万豪慕奇夕酒店&lt;br&gt;Moxy Tokyo Kinshicho by Marrio&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3258.81&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）8.13-8.17 大阪本町万豪慕奇夕酒店&lt;br&gt;Moxy Osaka Honmachi by Marriott&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2956.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（马蜂窝）8.17-8.20 京都十字酒店&lt;br&gt;Cross Hotel Kyoto&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2913.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（淘宝）和服体验&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1260&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（淘宝）环球影城门票加快速票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3288&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（淘宝）迪士尼门票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;976&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;27287.61&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;89&#34;&gt;8.9&lt;/h1&gt;
+&lt;p&gt;南京禄口到大阪关西机场，12:20-15:55 吉祥航空。&lt;/p&gt;
+&lt;p&gt;从 T1 航站楼出来领取 JRPASS，坐地铁到酒店，在酒店附近吃了第一顿饭，咖喱牛肉面条。买了罗森。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;公交卡充值&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400.72&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;牛骨ら～めん ぶっこ志(北浜店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1960&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;130.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;罗森&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;795&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;53.09&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8755&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;584.71&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;810&#34;&gt;8.10&lt;/h1&gt;
+&lt;p&gt;坐新干线从新大阪到东京，坐公交去浅草寺，然后去秋叶原，接着去天空树塔的 PokemonCenter&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;自动贩卖机（两瓶饮料）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;260&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;17.44&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;汉堡王&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;790&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;53&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Pokemon center skytree town&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;534.58&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;扭蛋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;300&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;20.12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;88.84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ministop&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;44.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店洗衣服&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1750&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;785.21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;811&#34;&gt;8.11&lt;/h1&gt;
+&lt;p&gt;早饭吃了吉野家，去新宿购物，晚上吃的金藏（有中文菜单）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;吉野家 (锦糸町北口店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1140&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;76.47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;购物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6108.7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ministop&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;38.07&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;饮料&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;160&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;10.73&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;全家&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;35.74&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;金藏 (錦糸町北口店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;201.01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店洗衣服&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;公交卡充值&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;266.41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5700&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6763.96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;812&#34;&gt;8.12&lt;/h1&gt;
+&lt;p&gt;去迪士尼玩，晚饭在 和風居酒屋 琴～koto～（老板娘会中文）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼门票打印&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;40&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.69&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11 早饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;17.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼两品饮料&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.88&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼中饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2160&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;145.14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼冷饮&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;300&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;20.16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼排骨&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;450&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30.24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;和風居酒屋 琴～koto～&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7100&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;477.08&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25.82&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼购物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7250&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;487.16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;17700&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1233&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;813&#34;&gt;8.13&lt;/h1&gt;
+&lt;p&gt;早饭吃 7-11，坐新干线到大阪，下午去黑门市场，晚上买了罗森&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11 早饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;24.75&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;黑门市场中饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;510.89&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;黑门市场豆奶&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;13.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;黑门市场草莓大福&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;450&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;29.84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;罗森&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;122.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店洗衣服&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.67&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1050&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;728.31&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;814&#34;&gt;8.14&lt;/h1&gt;
+&lt;p&gt;一天都在环球影城，比官方的开园时间要早一点&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;环球影城中饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1960&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;129.97&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;芒果冰淇淋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;33.15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;柠檬冰沙（两杯）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;900&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;59.68&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;排骨&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;590&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;39.12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;黄油啤酒&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;800&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;53.05&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;草莓冰沙&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;550&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;36.47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;罗森&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;80.53&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;购物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;13200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;875.29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;电扇&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;132.62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;20500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1439.88&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;815&#34;&gt;8.15&lt;/h1&gt;
+&lt;p&gt;心斋桥&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;一兰拉面（心斋桥店）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3240&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;216&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;珍珠奶茶&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;600&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;罗森&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;86.92&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;鸟贵族 (錦糸町駅前店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3210&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;214&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店洗衣服&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.67&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7450&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;583.59&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;816&#34;&gt;8.16&lt;/h1&gt;
+&lt;p&gt;大阪历史博物馆、奈良&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;博物馆门票（两张）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2680&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;178.49&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;地铁站-能量棒和水&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;奈良鹿饼&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;300&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;19.98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;若草山门票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;300&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;19.98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;饮料&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;160&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;10.66&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;七星烧肉 (北浜店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6199&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;412.87&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店洗衣服&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;400&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;26.64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;公交卡充值&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;266.41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;14039&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;961.29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;817&#34;&gt;8.17&lt;/h1&gt;
+&lt;p&gt;大阪 - 京都&lt;br&gt;
+到了京都发现化妆品价格比大阪贵，又坐车回大阪心斋桥买东西&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;酒店税&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;79.76&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;筷子纪念品&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;342.02&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;一兰拉面 (京都河原町店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3560&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;236.62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;心斋桥购物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;49048&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3259.98&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;全家&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;64.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;53808&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3982.48&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;818&#34;&gt;8.18&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;全家&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;35.62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;回转寿司&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;103.34&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;豆柴咖啡厅&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1760&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;117.08&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;抹茶水&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;33.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;清水寺水果冰淇淋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;33.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;百奇&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;276.47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;戒指&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3453.56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;先斗町焼肉やる気 (先斗町店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;407.39&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;抹茶冰淇淋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;550&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;36.59&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;饮料&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;130&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.65&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;章鱼小丸子&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;500&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;33.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3940&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4538.47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;819&#34;&gt;8.19&lt;/h1&gt;
+&lt;p&gt;和服体验，伏见稻荷神社&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;罗森早饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;18.81&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;洛匠甜品店&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;133.04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;饮料&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;260&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;17.3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;御守&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;133.04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;面包&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;23.94&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;烤肉DOURAKU  (京都六角通店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;496.26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;甜品&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1870&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;124.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;公交卡充值&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2000&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;133.04&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8130&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1079.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;820&#34;&gt;8.20&lt;/h1&gt;
+&lt;p&gt;大阪关西到禄口，20:00-22:00 吉祥航空。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;JPY&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;CNY&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;便利店鸡块&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;170&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;11.32&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;pokemonStore&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4860&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;323.6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;回转寿司&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;186.48&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;礼物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;358.33&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;免税店&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;965.19&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;牛肉饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;99.76&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5030&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1944.68&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;合计&#34;&gt;合计&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;日期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;金额&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.9&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;584.71&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.10&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;785.21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6763.96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1233&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.13&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;728.31&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.14&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1439.88&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.15&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;583.59&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.16&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;961.29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.17&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3982.48&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.18&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4538.47&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.19&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1079.83&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.20&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1944.68&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;24625.41&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;加上前期准备 24625.41+27287.61=51913.02&lt;/p&gt;
+">Japan Travel Bill</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://HsinDumas.github.io/post/hk-travel-bill/"" data-c="
+          &lt;h1 id=&#34;香港-7-天-6-晚流水账单&#34;&gt;香港 7 天 6 晚流水账单&lt;/h1&gt;
+&lt;h1 id=&#34;准备工作&#34;&gt;准备工作&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;金额&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（飞猪）香港澳门流量卡，不可以打电话，七天每天 1.5G，两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（飞猪）香港八达通两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;287&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（飞猪）南京飞深圳机票两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1815&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（飞猪）深圳飞南京机票两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3300&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（飞猪）香港嘉里酒店 6 晚&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7760&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;13218&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;126&#34;&gt;1.26&lt;/h1&gt;
+&lt;p&gt;南京 12:50 飞深圳，坐 11 号线从机场到福田，福田到香港西九龙的高铁班次很多，考虑到飞机可能延误，所以到了地铁站才买高铁票，走到佐敦地铁坐到麻油地转黄埔下（导航有点问题不用这么麻烦，不过高德在香港总是会出现问题），入住香港嘉里酒店，因为是银联卡所以只扣了 3000 港币押金，但是退款是退 3000 港币现金。晚饭随便找了一家吃，好像叫祥龙什么的，海鲜焗意粉，咖喱牛腩面。然后去 7-11、奇趣天地、屈臣氏买了点东西。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;深圳地铁，11 号线，微信扫码，两人&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;福田到香港西九龙高铁票，两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;136&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;晚饭海鲜焗意粉，咖喱牛腩面&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;67.62&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;50.79&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;奇趣天地&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;69.8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;60.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;屈臣氏&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;110.21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;438.72&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;127&#34;&gt;1.27&lt;/h1&gt;
+&lt;p&gt;中午出发去沙田马场，在红磡站老婆咳嗽所以去万宁买了点咳嗽药，路过美珍香就买了一盒零食，在地铁上买了第二天去迪士尼的门票。下了地铁走一段，然后刷八达通入场，周日的赛马是从下午 1 点开始，赛前会有骑师和马匹亮相，之后比赛就开始了，两场之间间隔一个小时，我们两个就看了一场就走了，因为不会玩赌注。然后我们去了尖沙咀，买了富豪雪糕，先是去了 DFS，结果人超多，可能是周日的原因。然后去了海港城，在里面吃了温野菜，出来后去屈臣氏买了点东西，然后做小巴回宾馆（老婆的八达通还掉了，去地铁站又买了一个，顺便充值），路上在泰昌买了蛋挞和饮料以及第二天去迪士尼要用的水杯。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;万宁&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;36.08&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;美珍香&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;146.38&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（大众点评）迪士尼三合一门票，两张&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1340&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;富豪雪糕车&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;10&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8.61&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;温野菜 (尖沙咀店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;479.77&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;八达通&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;200&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;172.38&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;屈臣氏&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;49.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;泰昌饼家&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;27.99&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;水杯&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;45.6&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;39.33&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2299.79&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;128&#34;&gt;1.28&lt;/h1&gt;
+&lt;p&gt;早上买了太平山的门票（后来因为排队没去），然后一天都是在迪士尼里面，陪老婆玩了三次明日世界和灰熊山谷，比上海排队要轻松的多。在迪士尼商店礼物，午餐在皇室吃的，晚餐在冒险家吃的，小食券换了冰欺凌和爆米花，晚上的巡演没怎么看就回去了，在地铁站买了礼物，7-11 买了吃的。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（大众点评）太平山门票，两人&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;146&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼礼物（补了 60HKD 的差价）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;485.28&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼吃饭补差价&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;10.33&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;迪士尼火鸡腿&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;51.52&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;买礼物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;130.89&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25.72&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;849.74&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;129&#34;&gt;1.29&lt;/h1&gt;
+&lt;p&gt;早上去 DFS 购物，结束了去吃一兰拉面，每人一小格吃拉面，然后又去给老婆买了两双鞋，充值八达通，早早回宾馆休息之后晚上出来吃的牛角（和温野菜是一家），买了第二天的海洋公园门票（春节特价只对大陆游客），去 7-11、美心买了吃的。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;购物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3007.5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;一兰（铜锣湾店）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;281.85&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;SKECHERS 两双鞋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;965&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;八达通&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;100&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;86.19&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;牛角日本烧肉专门店 (黄埔新天地店)&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;413.56&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;（大众点评）海洋公园门票（不含餐券），双人票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;341.4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;33.51&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;美心&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;36.95&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5165.96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;130&#34;&gt;1.30&lt;/h1&gt;
+&lt;p&gt;早上去了海洋公园，坐了海洋列车上山，吃了鸡腿饮料和哈根达斯，然后坐缆车下山。下午去了九记牛腩，充值八达通，去了美心和 7-11，回宾馆，晚饭吃了左麟右李，逛街买了鱼蛋，买了去澳门的来回船票。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;海洋公园吃饭&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;136.15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;九记牛腩（上环店）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;120&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;103.03&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;美心&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;51.36&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7-11&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;40.23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;左麟右李&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;129.67&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;鱼蛋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;30&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;25.76&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;八达通&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;100&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;85.86&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;澳门船票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;506&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1078.06&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;131&#34;&gt;1.31&lt;/h1&gt;
+&lt;p&gt;早上去了从中国客运码头出发去澳门，下船坐新葡京的发财车到葡京下，然后走路去大三巴，中途吃了点点心，在大三巴买了礼物，然后吃了玛嘉烈蛋挞（后来才知道这家把配方卖给了肯德基），做了三轮车去港澳码头，坐船回香港中国客运码头，晚上吃了牛涮锅（自助，性价比还不错）。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;点点心点心专门店&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;134.84&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;大三巴买礼物&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;75.74&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;蛋挞&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;55&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;47.35&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;三轮车&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;100&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;86.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;牛涮锅&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;315.28&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;659.31&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;21&#34;&gt;2.1&lt;/h1&gt;
+&lt;p&gt;酒店打车去高铁站（行李还有服务费），退了八达通，西九龙到深圳，深圳飞回南京&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;事项&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;港币&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;打车&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;65&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;55.96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;八达通退款&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-214&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;-184.25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;高铁票&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;136&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7.71&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;总计&#34;&gt;总计&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;日期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;人民币&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;准备工作&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;13218&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.26&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;438.72&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.27&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2299.79&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.28&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;849.74&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.29&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5165.96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.30&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1078.06&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1.31&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;659.31&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2.1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7.71&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;总计&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;23717.29&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+">HK Travel Bill</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://HsinDumas.github.io/post/about/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
+&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
+&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
+&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
+">关于</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/motion.js"></script>
+
+
+  <script
+    src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+  <script>
+    var scroll = new SmoothScroll('a[href*="#"]', {
+      speed: 200
+    });
+  </script>
+
+
+
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/mouse/fireworks.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/cool.js"></script>
+
+
+
+  <div class="snow-container"></div>
+  <script color="0,205,205" pointer-events="auto" zIndex="-1" opacity='0.7' count="99" src="https://cdn.jsdelivr.net/gh/hsindumas/HsinDumas.github.io@master/media/js/bg/canvas-nest.js"></script>
+
+
+</html>
