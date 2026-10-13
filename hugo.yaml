@@ -1,0 +1,38 @@
+baseURL: https://hsindumas.github.io/
+languageCode: zh-cn
+defaultContentLanguage: zh
+hasCJKLanguage: true
+title: HsinDumas
+theme: PaperMod
+timeZone: Asia/Shanghai
+enableRobotsTXT: true
+
+outputs:
+  home: [HTML, RSS, JSON]
+
+params:
+  description: 人活着赖着一口氧气
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+  ShowPostNavLinks: true
+  homeInfoParams:
+    Title: "Hi, I'm Hsin Dumas 👋"
+    Content: 人活着赖着一口氧气。Java / Spring Boot 开发，偶尔记录踩坑和旅行。
+  socialIcons:
+    - { name: github, url: "https://github.com/HsinDumas" }
+    - { name: email, url: "mailto:HsinDumas@gmail.com" }
+    - { name: rss, url: "/index.xml" }
+
+menu:
+  main:
+    - { name: 归档, url: /archives/, weight: 1 }
+    - { name: 标签, url: /tags/, weight: 2 }
+    - { name: 搜索, url: /search/, weight: 3 }
+    - { name: 关于, url: /about/, weight: 4 }
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
