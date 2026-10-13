@@ -1,38 +1,94 @@
 baseURL: https://hsindumas.github.io/
-languageCode: zh-cn
-defaultContentLanguage: zh
+defaultContentLanguage: zh-cn
 hasCJKLanguage: true
 title: HsinDumas
-theme: PaperMod
+theme: blowfish
 timeZone: Asia/Shanghai
 enableRobotsTXT: true
+enableEmoji: true
+summaryLength: 0
+
+pagination:
+  pagerSize: 100
+
+taxonomies:
+  tag: tags
+  category: categories
 
 outputs:
   home: [HTML, RSS, JSON]
 
-params:
-  description: 人活着赖着一口氧气
-  defaultTheme: auto
-  ShowReadingTime: true
-  ShowCodeCopyButtons: true
-  ShowToc: true
-  ShowPostNavLinks: true
-  homeInfoParams:
-    Title: "Hi, I'm Hsin Dumas 👋"
-    Content: 人活着赖着一口氧气。Java / Spring Boot 开发，偶尔记录踩坑和旅行。
-  socialIcons:
-    - { name: github, url: "https://github.com/HsinDumas" }
-    - { name: email, url: "mailto:HsinDumas@gmail.com" }
-    - { name: rss, url: "/index.xml" }
-
-menu:
-  main:
-    - { name: 归档, url: /archives/, weight: 1 }
-    - { name: 标签, url: /tags/, weight: 2 }
-    - { name: 搜索, url: /search/, weight: 3 }
-    - { name: 关于, url: /about/, weight: 4 }
-
 markup:
   goldmark:
+    parser:
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        block: true
     renderer:
       unsafe: true
+  highlight:
+    noClasses: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
+languages:
+  zh-cn:
+    locale: zh-cn
+    label: 简体中文
+    weight: 1
+    title: HsinDumas
+    params:
+      displayName: 中文
+      isoCode: zh-cn
+      dateFormat: "2006-01-02"
+      description: 人活着赖着一口氧气
+      author:
+        name: Hsin Dumas
+        image: img/avatar.png
+        headline: 人活着赖着一口氧气
+        bio: Java / Spring Boot 开发，偶尔记录踩坑和旅行。
+        links:
+          - github: https://github.com/HsinDumas
+          - email: mailto:HsinDumas@gmail.com
+          - rss: /index.xml
+    menu:
+      main:
+        - { name: 文章, pageRef: posts, weight: 10 }
+        - { name: 标签, pageRef: tags, weight: 20 }
+        - { name: 关于, pageRef: about, weight: 30 }
+        - { identifier: github, url: "https://github.com/HsinDumas", weight: 40, params: { icon: github } }
+
+params:
+  colorScheme: blowfish
+  defaultAppearance: dark
+  autoSwitchAppearance: true
+  enableSearch: true
+  enableCodeCopy: true
+  smartTOC: true
+  header:
+    layout: fixed-fill-blur
+  footer:
+    showAppearanceSwitcher: true
+    showScrollToTop: true
+  homepage:
+    layout: landing
+    homepageImage: img/background.jpg
+    showRecent: true
+    showRecentItems: 6
+    showMoreLink: true
+    showMoreLinkDest: /posts/
+    cardView: true
+  article:
+    showReadingTime: true
+    showWordCount: true
+    showTableOfContents: true
+    showTaxonomies: true
+    showPagination: true
+    showHero: false
+  list:
+    showCards: true
+    cardView: false
+    groupByYear: true
+  taxonomy:
+    showTermCount: true

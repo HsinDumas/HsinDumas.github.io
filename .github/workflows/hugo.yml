@@ -23,7 +23,7 @@ jobs:
           submodules: recursive
       - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: latest
+          hugo-version: "0.167.0"
           extended: true
       - run: hugo --minify
       - uses: actions/upload-pages-artifact@v3
