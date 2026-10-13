@@ -8,15 +8,7 @@ enableRobotsTXT: true
 enableEmoji: true
 summaryLength: 0
 
-pagination:
-  pagerSize: 100
-
-taxonomies:
-  tag: tags
-  category: categories
-
-outputs:
-  home: [HTML, RSS, JSON]
+disableKinds: [taxonomy, term, RSS]
 
 markup:
   goldmark:
@@ -28,9 +20,6 @@ markup:
       unsafe: true
   highlight:
     noClasses: false
-  tableOfContents:
-    startLevel: 2
-    endLevel: 4
 
 languages:
   zh-cn:
@@ -47,15 +36,12 @@ languages:
         name: Hsin Dumas
         image: img/avatar.png
         headline: 人活着赖着一口氧气
-        bio: Java / Spring Boot 开发，偶尔记录踩坑和旅行。
+        bio: Java / Spring Boot 开发。
         links:
           - github: https://github.com/HsinDumas
           - email: mailto:HsinDumas@gmail.com
-          - rss: /index.xml
     menu:
       main:
-        - { name: 文章, pageRef: posts, weight: 10 }
-        - { name: 标签, pageRef: tags, weight: 20 }
         - { name: 关于, pageRef: about, weight: 30 }
         - { identifier: github, url: "https://github.com/HsinDumas", weight: 40, params: { icon: github } }
 
@@ -63,9 +49,7 @@ params:
   colorScheme: blowfish
   defaultAppearance: dark
   autoSwitchAppearance: true
-  enableSearch: true
-  enableCodeCopy: true
-  smartTOC: true
+  enableSearch: false
   header:
     layout: fixed-fill-blur
   footer:
@@ -74,21 +58,4 @@ params:
   homepage:
     layout: landing
     homepageImage: img/background.jpg
-    showRecent: true
-    showRecentItems: 6
-    showMoreLink: true
-    showMoreLinkDest: /posts/
-    cardView: true
-  article:
-    showReadingTime: true
-    showWordCount: true
-    showTableOfContents: true
-    showTaxonomies: true
-    showPagination: true
-    showHero: false
-  list:
-    showCards: true
-    cardView: false
-    groupByYear: true
-  taxonomy:
-    showTermCount: true
+    showRecent: false

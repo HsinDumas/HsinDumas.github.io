@@ -1,12 +1,12 @@
 ---
 title: "Hi, I'm Hsin Dumas 👋"
 heroCaption: "人活着赖着一口氧气"
-heroLead: "Java / Spring Boot 开发者，喜欢写**零侵入**的小 starter，偶尔记录踩坑和旅行。"
+heroLead: "Java / Spring Boot 开发者，喜欢写**零侵入**的小 starter。"
 heroButtons:
-  - label: "读文章"
-    url: "/posts/"
   - label: "GitHub"
     url: "https://github.com/HsinDumas"
+  - label: "联系我"
+    url: "mailto:HsinDumas@gmail.com"
     style: "outline"
 ---
 
